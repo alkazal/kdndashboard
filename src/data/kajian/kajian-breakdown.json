@@ -1,0 +1,20 @@
+{
+  "KNT": {
+    "label": "KAJIAN NASKHAH TAHAN",
+    "hq": 1023,
+    "negeri": 1400,
+    "jumlah": 2413
+  },
+  "KNB": {
+    "label": "KAJIAN NASKHAH BARU",
+    "hq": 2,
+    "negeri": 16,
+    "jumlah": 18
+  },
+  "KNR": {
+    "label": "KAJIAN NASKHAH RUJUK",
+    "hq": 35,
+    "negeri": 9,
+    "jumlah": 44
+  }
+}

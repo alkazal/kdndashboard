@@ -1,0 +1,114 @@
+// src/styles/themes.css
+/* Light theme (default) */
+:root {
+  /* Theme variables */
+  --color-primary: #14b8a6;
+  --color-background: #ffffff;
+  --color-surface: #f8fafc;
+  --color-text: #0f172a;
+  --color-text-secondary: #64748b;
+
+  /* Gray colors */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* Slate colors */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+
+  /* White/Black */
+  --color-white: #ffffff;
+  --color-black: #000000;
+}
+
+/* Dark theme - Tailwind's dark mode will handle most colors, but we override with our variables */
+.dark {
+  /* Theme variables */
+  --color-primary: #5eead4;
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-text: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+
+  /* Override gray colors for dark theme */
+  --color-gray-50: #0f172a;
+  --color-gray-100: #1e293b;
+  --color-gray-200: #334155;
+  --color-gray-300: #475569;
+  --color-gray-400: #64748b;
+  --color-gray-500: #94a3b8;
+  --color-gray-600: #cbd5e1;
+  --color-gray-700: #e2e8f0;
+  --color-gray-800: #f1f5f9;
+  --color-gray-900: #f8fafc;
+
+  /* Override slate colors for dark theme */
+  --color-slate-50: #0f172a;
+  --color-slate-100: #1e293b;
+  --color-slate-200: #334155;
+  --color-slate-300: #475569;
+  --color-slate-400: #64748b;
+  --color-slate-500: #94a3b8;
+  --color-slate-600: #cbd5e1;
+  --color-slate-700: #e2e8f0;
+  --color-slate-800: #f1f5f9;
+  --color-slate-900: #f8fafc;
+
+  /* White/Black for dark theme */
+  --color-white: #f1f5f9;
+  --color-black: #0f172a;
+}
+
+/* Premium theme */
+.premium {
+  /* Theme variables */
+  --color-primary: #D4AF37;
+  --color-background: #0A0A0A;
+  --color-surface: #1E1E1E;
+  --color-text: #FCF4C0;
+  --color-text-secondary: #C0C0C0;
+
+  /* Gray colors for premium theme */
+  --color-gray-50: #0A0A0A;
+  --color-gray-100: #1E1E1E;
+  --color-gray-200: #2A2A2A;
+  --color-gray-300: #3A3A3A;
+  --color-gray-400: #C0C0C0;
+  --color-gray-500: #D4AF37;
+  --color-gray-600: #E5C158;
+  --color-gray-700: #F0D080;
+  --color-gray-800: #F8E8A0;
+  --color-gray-900: #FCF4C0;
+
+  /* Slate colors for premium theme */
+  --color-slate-50: #0A0A0A;
+  --color-slate-100: #1E1E1E;
+  --color-slate-200: #2A2A2A;
+  --color-slate-300: #3A3A3A;
+  --color-slate-400: #C0C0C0;
+  --color-slate-500: #D4AF37;
+  --color-slate-600: #E5C158;
+  --color-slate-700: #F0D080;
+  --color-slate-800: #F8E8A0;
+  --color-slate-900: #FCF4C0;
+
+  /* White/Black for premium theme */
+  --color-white: #FCF4C0;
+  --color-black: #0A0A0A;
+}
