@@ -121,13 +121,6 @@ export default function Navigation({ currentPage, setCurrentPage }) {
           >
             ANALYTICS
           </button> */}
-          {/* <button
-            onClick={() => setCurrentPage('kajian')}
-            className={`text-sm/6 font-semibold ${currentPage === 'kajian' ? 'text-indigo-600' : 'text-gray-900'}`}
-            aria-current={currentPage === 'kajian' ? 'page' : undefined}
-          >
-            KAJIAN & PERINTAH LARANGAN
-          </button> */}
             <a href="#"
             onClick={() => setCurrentPage('kajian')}
             className={`text-sm/6 font-semibold ${currentPage === 'kajian' ? 'text-indigo-600' : 'text-gray-900'}`}
@@ -135,16 +128,6 @@ export default function Navigation({ currentPage, setCurrentPage }) {
           >
             KAJIAN & PERINTAH LARANGAN
           </a>
-          {/* <button
-            onClick={() => setCurrentPage('penguatkuasaan')}
-            className={`text-sm/6 font-semibold ${currentPage === 'penguatkuasaan' ? 'text-indigo-600' : 'text-gray-900'}`}
-            aria-current={currentPage === 'penguatkuasaan' ? 'page' : undefined}
-          >
-            PENGUATKUASAAN
-          </button> */}
-                  {/* <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            PENGUATKUASAAN
-        </a> */}
             <a href="#" onClick={() => setCurrentPage('penguatkuasaan')}
                 className={`text-sm/6 font-semibold  ${currentPage === 'penguatkuasaan' ? 'text-indigo-600' : 'text-gray-900'}`}
                 aria-current={currentPage === 'penguatkuasaan' ? 'page' : undefined}>
@@ -163,15 +146,16 @@ export default function Navigation({ currentPage, setCurrentPage }) {
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
         <div className="fixed inset-0 z-50" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-slate-200 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
+              {/* <img
                 alt=""
                 src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                 className="h-8 w-auto"
-              />
+              /> */}<h2 className="text-xl font-bold text-indigo-400">KDN - DASHBOARD</h2>
+                      {/* <h3>KEMENTERIAN DALAM NEGERI MALAYSIA</h3> */}
             </a>
             <button
               type="button"
@@ -185,7 +169,7 @@ export default function Navigation({ currentPage, setCurrentPage }) {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                <Disclosure as="div" className="-mx-3">
+                {/* <Disclosure as="div" className="-mx-3">
                   <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
                     Product
                     <ChevronDownIcon aria-hidden="true" className="size-5 flex-none group-data-open:rotate-180" />
@@ -202,7 +186,7 @@ export default function Navigation({ currentPage, setCurrentPage }) {
                       </DisclosureButton>
                     ))}
                   </DisclosurePanel>
-                </Disclosure>
+                </Disclosure> */}
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
@@ -212,15 +196,7 @@ export default function Navigation({ currentPage, setCurrentPage }) {
                 >
                   LESEN, PERMIT & PRUF
                 </button>
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    setCurrentPage('analytics');
-                  }}
-                  className={`-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold ${currentPage === 'analytics' ? 'bg-gray-100' : ''} text-gray-900 hover:bg-gray-50`}
-                >
-                  ANALYTICS
-                </button>
+                
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
@@ -238,6 +214,16 @@ export default function Navigation({ currentPage, setCurrentPage }) {
                   className={`-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold ${currentPage === 'penguatkuasaan' ? 'bg-gray-100' : ''} text-gray-900 hover:bg-gray-50`}
                 >
                   PENGUATKUASAAN
+                </button>
+                              
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setCurrentPage('pnp');
+                  }}
+                  className={`-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold ${currentPage === 'pnp' ? 'bg-gray-100' : ''} text-gray-900 hover:bg-gray-50`}
+                >
+                  PENDIDIKAN & PENCEGAHAN
                 </button>
               </div>
               <div className="py-6">
