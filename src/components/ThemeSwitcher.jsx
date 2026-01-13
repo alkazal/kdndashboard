@@ -35,7 +35,7 @@ export default function ThemeSwitcher() {
             className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${getButtonStyles(themeOption, theme === themeOption.value)}`}
           >
             <span className="mr-1">{themeOption.icon}</span>
-            {themeOption.name}
+            {/* {themeOption.name} */}
           </button>
         ))}
       </div>

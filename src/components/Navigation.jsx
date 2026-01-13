@@ -141,15 +141,23 @@ export default function Navigation({ currentPage, setCurrentPage }) {
             </a> 
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          {/* <ThemeSwitcher /> */}
-        </div>
+          <ThemeSwitcher />
+              </div>
+              <div className="pl-2">
+                <a
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >
+                  Log in
+                </a>
+              </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
         <div className="fixed inset-0 z-50" />
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-slate-200 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">KDN</span>
               {/* <img
                 alt=""
                 src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"

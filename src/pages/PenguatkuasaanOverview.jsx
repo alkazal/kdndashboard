@@ -18,6 +18,10 @@ import { getLapanganBarOption } from "../charts/penguatkuasaan/LapanganBarChart"
 import { getPintuMasukDonutOption } from "../charts/penguatkuasaan/PintuMasukDonut";
 import { getPintuMasukStackedOption } from "../charts/penguatkuasaan/PintuMasukStacked";
 
+import operasi from "../data/penguatkuasaan/laporan.json";
+import { groupByNegeriJenis } from "../utils/groupByNegeriJenis";
+import { getNegeriJenisBarOption } from "../charts/penguatkuasaan/NegeriJenisBarChart";
+
 export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) {
      useGSAP(() => {
         gsap.from(".penguatkuasaan-section", {
@@ -27,7 +31,10 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) 
           stagger: 0.15,
           ease: "power2.out"
         });
-      }, []);
+     }, []);
+    
+    const { negeriList, jenisList, data } =
+        groupByNegeriJenis(operasi);
     
     return (
         <div className="dashboard min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -93,10 +100,27 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) 
                             </h2>
                         </div>
 
-                    <ReactECharts
-                        option={getLapanganBarOption(statistik.lapangan)}
-                        style={{ height: 280 }}
-                    />
+                        <ReactECharts
+                            option={getLapanganBarOption(statistik.lapangan)}
+                            style={{ height: 280 }}
+                        />
+                    </div>
+
+                    <div className="penguatkuasaan-section">
+                        <div className="flex items-center justify-between mb-4 text-slate-600">
+                            <h2 className="font-semibold text-xl">
+                                LAPORAN PENGUATKUASAAN MENGIKUT JENIS DAN NEGERI
+                            </h2>
+                        </div>
+
+                        <ReactECharts
+                                option={getNegeriJenisBarOption(
+                                  negeriList,
+                                  jenisList,
+                                  data
+                                )}
+                                style={{ height: 280 }}
+                              />
                     </div>
 
 
