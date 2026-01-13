@@ -185,7 +185,7 @@ export default function DrilldownPanel() {
           {/* <div className="text-sm text-red-500 font-bold">
             ENFORCEMENT DEBUG: {selectedCategory} | Filtered: {filteredData.length} | Laporan total: {laporan.length}
           </div> */}
-          <div className="text-sm text-slate-600">
+          <div className="text-sm text-slate-200">
             Menunjukkan {filteredData.length} rekod untuk {jenis} - {kategori}
           </div>
           {filteredData.length > 0 ? (
@@ -203,8 +203,8 @@ export default function DrilldownPanel() {
               <tbody>
                 {filteredData.map((item, index) => (
                   <tr key={index} className="border-b last:border-0">
-                    <td className="py-2">{item.TARIKH}</td>
-                    <td className="py-2">{item.NEGERI}</td>
+                    <td className="py-2 align-top">{item.TARIKH}</td>
+                    <td className="py-2 align-top">{item.NEGERI}</td>
                     {/* <td className="py-2">{item.LOKASI}</td> */}
                     <td className="py-2"><span className="font-medium">{item.AKTIVITI}</span><br/><br/><span className="text-balance">{item.LOKASI}</span></td>
                     {/* <td className="py-2">{item["STATUS KES"]}</td> */}

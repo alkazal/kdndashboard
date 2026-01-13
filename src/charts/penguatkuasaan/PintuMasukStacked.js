@@ -16,6 +16,7 @@ export const getPintuMasukStackedOption = (utama, sekunder) => ({
         utama.konsainan
       ],
       itemStyle: { color: "#2563eb" }
+      
     },
     {
       name: "Sekunder",
@@ -26,6 +27,6 @@ export const getPintuMasukStackedOption = (utama, sekunder) => ({
         sekunder.konsainan
       ],
       itemStyle: { color: "#22c55e" }
-    }
+    },
   ]
 });
