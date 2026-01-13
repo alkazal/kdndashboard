@@ -48,7 +48,7 @@ export default function Navigation({ currentPage, setCurrentPage }) {
               src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
               className="h-8 w-auto"
             /> */}
-                      <h2 className="text-xl font-bold">KDN - PENGUATKUASAAN DAN KAWALAN</h2>
+                      <h2 className="text-xl font-bold">KDN - DASHBOARD</h2>
                       <h3>KEMENTERIAN DALAM NEGERI MALAYSIA</h3>
           </a>
         </div>
