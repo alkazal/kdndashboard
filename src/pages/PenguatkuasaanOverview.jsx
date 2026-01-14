@@ -32,9 +32,23 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) 
           ease: "power2.out"
         });
      }, []);
+
+    const { setChartFilter, clearChartFilter } =
+        useDashboardStore();
     
     const { negeriList, jenisList, data } =
         groupByNegeriJenis(operasi);
+    
+    const onEvents = {
+        click: (params) => {
+        if (!params.name || !params.seriesName) return;
+
+        setChartFilter({
+            negeri: params.name,
+            jenis: params.seriesName
+        });
+        }
+    };
     
     return (
         <div className="dashboard min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -50,21 +64,25 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) 
                         title="AMCP 1984"
                         jenis="AMCP 1984"
                         rows={AMCP}
+                        operasiData={operasi}
                         />
                         <EnforcementTable
                         title="APTQ 1986"
                         jenis="APTQ 1986"
                         rows={APTQ}
+                        operasiData={operasi}
                         />
                         <EnforcementTable
                         title="APF 2002"
                         jenis="APF 2002"
                         rows={APF}
+                        operasiData={operasi}
                         />
                         <EnforcementTable
                         title="AAP 1971"
                         jenis="AAP 1971"
                         rows={AAP}
+                        operasiData={operasi}
                         />
                     </div>
 
@@ -92,40 +110,55 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) 
                     </div>
                     </div>
 
-                    {/* LAPANGAN */}
-                    <div className="penguatkuasaan-section">
-                        <div className="flex items-center justify-between mb-4 text-slate-600">
-                            <h2 className="font-semibold text-xl">
+                </div>
+                
+                <div className="penguatkuasaan-section grid grid-cols-2 md:grid-cols-2 gap-6">
+                {/* LAPANGAN */}
+                    {/* <div className="penguatkuasaan-section lapangan-chart"> */}
+                        <div className="dark:bg-gray-800 rounded-xl shadow p-6">
+                            <h2 className="font-semibold mb-4 text-lg text-slate-700 dark:text-slate-200">
                                 LAPANGAN PENGUATKUASAAN
                             </h2>
+
+                                <ReactECharts
+                                    option={getLapanganBarOption(statistik.lapangan)}
+                                    style={{ height: 220 }}
+                                    opts={{ renderer: 'canvas' }}
+                                />
                         </div>
-
-                        <ReactECharts
-                            option={getLapanganBarOption(statistik.lapangan)}
-                            style={{ height: 280 }}
-                        />
-                    </div>
-
+                    {/* </div> */}
+                
+                    {/* LAPORAN NEGERI JENIS */}
                     <div className="penguatkuasaan-section">
-                        <div className="flex items-center justify-between mb-4 text-slate-600">
-                            <h2 className="font-semibold text-xl">
-                                LAPORAN PENGUATKUASAAN MENGIKUT JENIS DAN NEGERI
-                            </h2>
-                        </div>
-
-                        <ReactECharts
-                                option={getNegeriJenisBarOption(
-                                  negeriList,
-                                  jenisList,
-                                  data
+                        <div className="dark:bg-gray-800 rounded-xl shadow p-6">
+                            <div className="flex items-center justify-between mb-4">
+                                <h2 className="font-semibold text-lg text-slate-600 dark:text-slate-200">
+                                    LAPORAN MENGIKUT NEGERI & AKTA
+                                </h2>
+                                {(useDashboardStore.getState().filterNegeri || useDashboardStore.getState().filterJenis) && (
+                                    <button
+                                        onClick={clearChartFilter}
+                                        className="text-xs px-3 py-1 bg-red-100 text-red-700 hover:bg-red-200 rounded transition"
+                                    >
+                                        Clear Filter
+                                    </button>
                                 )}
-                                style={{ height: 280 }}
-                              />
+                            </div>
+
+                            <ReactECharts
+                                option={getNegeriJenisBarOption(
+                                    negeriList,
+                                    jenisList,
+                                    data
+                                )}
+                                onEvents={onEvents}
+                                style={{ height: 200 }}
+                            />
+                        </div>
                     </div>
-
-
                     
                 </div>
+
                 <DrilldownPanel />
                 <LaporanDetailModal />
             </div>

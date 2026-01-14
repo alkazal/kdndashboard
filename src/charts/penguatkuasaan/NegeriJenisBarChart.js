@@ -5,7 +5,13 @@ export const getNegeriJenisBarOption = (
 ) => ({
   tooltip: { trigger: "axis" },
   legend: { bottom: 0 },
-  grid: { left: 40, right: 20, bottom: 60 },
+ grid: { 
+    left: 60, 
+    right: 40, 
+    bottom: 30,
+    top: 20,
+    containLabel: true 
+  },
 
   xAxis: {
     type: "category",

@@ -140,17 +140,17 @@ export default function Navigation({ currentPage, setCurrentPage }) {
                 PENDIDIKAN & PENCEGAHAN
             </a> 
         </PopoverGroup>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <ThemeSwitcher />
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                <ThemeSwitcher />
               </div>
-              <div className="pl-2">
+              {/* <div className="pl-2">
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Log in
                 </a>
-              </div>
+              </div> */}
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
         <div className="fixed inset-0 z-50" />

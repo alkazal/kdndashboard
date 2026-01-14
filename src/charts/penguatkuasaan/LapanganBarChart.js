@@ -1,6 +1,17 @@
 export const getLapanganBarOption = (data) => ({
-  tooltip: { trigger: "axis" },
-  grid: { left: 40, right: 20, bottom: 40 },
+  tooltip: { 
+    trigger: "axis",
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  grid: { 
+    left: 60, 
+    right: 40, 
+    bottom: 0,
+    top: 20,
+    containLabel: true 
+  },
   xAxis: {
     type: "category",
     data: [
@@ -11,9 +22,17 @@ export const getLapanganBarOption = (data) => ({
       "Naskhah Ditahan",
       "Filem Dirampas"
     ],
-    axisLabel: { rotate: 25 }
+    axisLabel: { 
+      rotate: 25,
+      fontSize: 11
+    }
   },
-  yAxis: { type: "value" },
+  yAxis: { 
+    type: "value",
+    axisLabel: {
+      fontSize: 11
+    }
+  },
   series: [
     {
       type: "bar",
@@ -25,17 +44,21 @@ export const getLapanganBarOption = (data) => ({
         data.naskhah_ditahan,
         data.filem_dirampas
       ],
-      barWidth: "45%",
+      barWidth: "50%",
       itemStyle: {
-        color: "#0d9488",
+        color: "#14b8a6",
         borderRadius: [6, 6, 0, 0]
       },
+      animationDuration: 900,
+      animationDelay: (idx) => idx * 120,
+      animationEasing: "cubicOut",
       label: {
         show: true,
         position: 'top',
         formatter: '{c}',
         fontSize: 12,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        // color: '#334155'
       }
     }
   ]
