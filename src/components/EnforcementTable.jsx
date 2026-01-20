@@ -38,7 +38,7 @@ export default function EnforcementTable({ title, rows, jenis, operasiData }) {
 
   return (
     <div className="bg-white rounded-xl shadow p-6">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-2">
         <h3 className="font-semibold">{title}</h3>
         {(filterNegeri || filterJenis) && (
           <span className="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded">
@@ -59,7 +59,7 @@ export default function EnforcementTable({ title, rows, jenis, operasiData }) {
                 className={`border-b cursor-pointer transition-colors ${
                   isSelected
                     ? 'bg-teal-50 border-teal-200 hover:bg-teal-100'
-                    : 'hover:bg-slate-50'
+                    : 'hover:bg-teal-200'
                 }`}
               >
                 <td className={`py-2 font-medium ${isSelected ? 'text-teal-800' : ''}`}>{key}</td>

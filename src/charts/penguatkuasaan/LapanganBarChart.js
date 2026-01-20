@@ -22,15 +22,17 @@ export const getLapanganBarOption = (data) => ({
       "Naskhah Ditahan",
       "Filem Dirampas"
     ],
-    axisLabel: { 
-      rotate: 25,
-      fontSize: 11
+    axisLabel: {       
+      rotate: 8,
+      fontSize: 11,
+      color: '#FFF'
     }
   },
   yAxis: { 
     type: "value",
     axisLabel: {
-      fontSize: 11
+      fontSize: 11,
+      color: '#FFF'
     }
   },
   series: [

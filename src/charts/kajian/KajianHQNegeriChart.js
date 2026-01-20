@@ -66,7 +66,7 @@ export const getKajianHQNegeriPieOption = (data) => ({
         }
       },
       labelLine: {
-        show: false
+        show: true
       },
       data: [
         { value: data.hq, name: 'HQ', itemStyle: { color: '#0d9488' } },

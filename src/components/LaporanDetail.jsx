@@ -1,9 +1,10 @@
 import { XMarkIcon, PrinterIcon, DocumentArrowDownIcon } from "@heroicons/react/24/outline";
 import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function LaporanDetail({ record, onClose }) {
   const containerRef = useRef(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     gsap.from(containerRef.current, {
@@ -22,6 +23,31 @@ export default function LaporanDetail({ record, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black/20 z-50 flex items-center justify-center">
+      {/* Image Viewer Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black/80 z-60 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div 
+            className="relative max-w-4xl max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img 
+              src={selectedImage} 
+              alt="Enlarged view" 
+              className="w-full h-full object-contain"
+            />
+            <button 
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 bg-white/80 hover:bg-white rounded-full p-2"
+            >
+              <XMarkIcon className="w-6 h-6 text-black" />
+            </button>
+          </div>
+        </div>
+      )}
+
       <div
         ref={containerRef}
         className="bg-slate-300 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl shadow-lg" style={{ opacity: '100' }}
@@ -93,11 +119,12 @@ export default function LaporanDetail({ record, onClose }) {
                   // Convert .png to .jpeg and fix typo "imge3" to "image3"
                   let imageName = img.replace('.png', '.jpeg').replace('imge3', 'image3');
                   return (
-                    <div key={i} className="bg-slate-100 rounded-lg overflow-hidden">
+                    <div key={i} className="bg-slate-100 rounded-lg overflow-hidden cursor-pointer hover:shadow-lg transition-shadow">
                       <img
                         src={`/img/${imageName}`}
                         alt={`Bukti ${i + 1}`}
-                        className="w-full h-32 object-cover"
+                        className="w-full h-32 object-cover hover:opacity-80 transition-opacity"
+                        onClick={() => setSelectedImage(`/img/${imageName}`)}
                         onError={(e) => {
                           e.target.style.display = 'none';
                           e.target.nextSibling.style.display = 'flex';

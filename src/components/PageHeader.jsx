@@ -1,9 +1,8 @@
 import {
-  BriefcaseIcon,
+  ListBulletIcon,
   CalendarIcon,
   CheckIcon,
   ChevronDownIcon,
-  CurrencyDollarIcon,
   LinkIcon,
   MapPinIcon,
   PencilIcon,
@@ -25,13 +24,13 @@ export default function PageHeader({ title = 'STATISTIK LESEN, PERMIT & PRUF', p
         </div>
       </div>
       <div className="mt-5 flex lg:mt-0 lg:ml-4">
-        {/* <span className="hidden sm:block">
+        <span className="hidden sm:block">
           <button
             type="button"
             className="inline-flex items-center rounded-md bg-white dark:bg-gray-800 px-3 py-2 text-sm font-semibold text-gray-900 dark:text-white shadow-xs inset-ring inset-ring-gray-300 dark:inset-ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700"
           >
-            <PencilIcon aria-hidden="true" className="mr-1.5 -ml-0.5 size-5 text-gray-400" />
-            Edit
+            <MapPinIcon aria-hidden="true" className="mr-1.5 -ml-0.5 size-5 text-gray-400" />
+            COP
           </button>
         </span>
 
@@ -40,10 +39,10 @@ export default function PageHeader({ title = 'STATISTIK LESEN, PERMIT & PRUF', p
             type="button"
             className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50"
           >
-            <LinkIcon aria-hidden="true" className="mr-1.5 -ml-0.5 size-5 text-gray-400" />
-            View
+            <ListBulletIcon aria-hidden="true" className="mr-1.5 -ml-0.5 size-5 text-gray-400" />
+            LAPORAN
           </button>
-        </span> */}
+        </span>
 
         {/* <span className="sm:ml-3">
           <button

@@ -4,7 +4,12 @@ export const getNegeriJenisBarOption = (
   data
 ) => ({
   tooltip: { trigger: "axis" },
-  legend: { bottom: 0 },
+  legend: {
+    bottom: 0,
+    textStyle: {
+      color: '#FFF' // Set the desired color (e.g., red)
+    }
+   },
  grid: { 
     left: 60, 
     right: 40, 
@@ -16,10 +21,18 @@ export const getNegeriJenisBarOption = (
   xAxis: {
     type: "category",
     data: negeriList,
-    axisLabel: { rotate: 0 }
+    axisLabel: {
+      rotate: 0,
+      color: '#FFF'
+     }
   },
 
-  yAxis: { type: "value" },
+  yAxis: {
+    type: "value",
+    axisLabel: {      
+      color: '#FFF'
+     }
+   },
 
   series: jenisList.map((jenis) => ({
     name: jenis,

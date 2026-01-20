@@ -1,10 +1,12 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ReactECharts from "echarts-for-react";
+import { useState } from "react";
 import { useDashboardStore } from "../store/dashboardStore";
 
 import Navigation from "../components/Navigation";
 import PageHeader from "../components/PageHeader";
+import StatesList from "../components/StatesList";
 import AMCP from "../data/penguatkuasaan/statistikAMCP.json";
 import APTQ from "../data/penguatkuasaan/statistikAPTQ.json";
 import APF from "../data/penguatkuasaan/statistikAPF.json";
@@ -51,10 +53,12 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) 
     };
     
     return (
-        <div className="dashboard min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="dashboard min-h-screen bg-gray-50 dark:bg-gray-900 px-10 py-2">
             <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
             <div className="p-4 space-y-6">
-                <PageHeader title="STATISTIK PENGUATKUASAAN" period="Januari – Mei 2030" />
+                <StatesList onStateSelect={(state) => console.log('Selected state:', state)} />
+                
+                <PageHeader title="STATISTIK PENGUATKUASAAN" period="Januari – Mei 2026" />
                 
                 <div className="penguatkuasaan-section grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* ENFORCEMENT TABLES */}
@@ -87,32 +91,32 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) 
                     </div>
 
                     {/* PINTU MASUK */}
-                    <div className="grid grid-cols-2 gap-6">
-                    <div className="bg-white rounded-xl shadow p-6">
-                        <h2 className="font-semibold mb-4">PINTU MASUK</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-white rounded-xl shadow p-6">
+                            <h2 className="font-semibold mb-4">PINTU MASUK</h2>
 
-                        <ReactECharts
-                        option={getPintuMasukDonutOption(statistik.pintu_masuk)}
-                        style={{ height: 280 }}
-                        />
-                    </div>
+                            <ReactECharts
+                            option={getPintuMasukDonutOption(statistik.pintu_masuk)}
+                            style={{ height: 280 }}
+                            />
+                        </div>
 
-                    <div className="bg-white rounded-xl shadow p-6">
-                        <h2 className="font-semibold mb-4">PINTU MASUK (Utama vs Sekunder)</h2>
+                        <div className="bg-white rounded-xl shadow p-6">
+                            <h2 className="font-semibold mb-4">PINTU MASUK (Utama vs Sekunder)</h2>
 
-                        <ReactECharts
-                        option={getPintuMasukStackedOption(
-                            statistik.pintu_masuk_utama,
-                            statistik.pintu_masuk_sekunder
-                        )}
-                        style={{ height: 280 }}
-                        />
-                    </div>
+                            <ReactECharts
+                            option={getPintuMasukStackedOption(
+                                statistik.pintu_masuk_utama,
+                                statistik.pintu_masuk_sekunder
+                            )}
+                            style={{ height: 280 }}
+                            />
+                        </div>
                     </div>
 
                 </div>
                 
-                <div className="penguatkuasaan-section grid grid-cols-2 md:grid-cols-2 gap-6">
+                <div className="penguatkuasaan-section grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* LAPANGAN */}
                     {/* <div className="penguatkuasaan-section lapangan-chart"> */}
                         <div className="dark:bg-gray-800 rounded-xl shadow p-6">
@@ -133,7 +137,7 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) 
                         <div className="dark:bg-gray-800 rounded-xl shadow p-6">
                             <div className="flex items-center justify-between mb-4">
                                 <h2 className="font-semibold text-lg text-slate-600 dark:text-slate-200">
-                                    LAPORAN MENGIKUT NEGERI & AKTA
+                                    LAPORAN NEGERI & AKTA
                                 </h2>
                                 {(useDashboardStore.getState().filterNegeri || useDashboardStore.getState().filterJenis) && (
                                     <button

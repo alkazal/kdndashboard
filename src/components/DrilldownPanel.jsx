@@ -23,6 +23,7 @@ import kajianMonthly from "../data/kajian/monthly-breakdown.json";
 // Charts
 import { getMonthlyTrendOption } from "../charts/MonthlyTrendChart";
 import { getKajianHQNegeriPieOption } from "../charts/kajian/KajianHQNegeriChart";
+import { getStatusKESDonutOption } from "../charts/penguatkuasaan/StatusKESDonut";
 
 const dataMap = {
   PP: pp,
@@ -48,7 +49,7 @@ const kajianCategoryLabels = {
 
 export default function DrilldownPanel() {
   const panelRef = useRef(null);
-  const { selectedCategory, closeDrilldown, openLaporanDetail } = useDashboardStore();
+  const { selectedCategory, closeDrilldown, openLaporanDetail, filterNegeri } = useDashboardStore();
 
   // Get category label - check Kajian labels first, then main overview
   const categoryData = overview.cards?.find(c => c.key === selectedCategory);
@@ -176,9 +177,11 @@ export default function DrilldownPanel() {
     // Handle enforcement categories (e.g., "AMCP 1984_OPERASI")
     if (selectedCategory.includes("_")) {
       const [jenis, kategori] = selectedCategory.split("_");
-      const filteredData = laporan.filter(item => 
-        item.JENIS === jenis && item.KATEGORI === kategori
-      );
+      const filteredData = laporan.filter(item => {
+        const matchJenis = item.JENIS === jenis && item.KATEGORI === kategori;
+        const matchNegeri = !filterNegeri || item.NEGERI === filterNegeri;
+        return matchJenis && matchNegeri;
+      });
 
       return (
         <div className="space-y-4">
@@ -186,8 +189,22 @@ export default function DrilldownPanel() {
             ENFORCEMENT DEBUG: {selectedCategory} | Filtered: {filteredData.length} | Laporan total: {laporan.length}
           </div> */}
           <div className="text-sm text-slate-200">
-            Menunjukkan {filteredData.length} rekod untuk {jenis} - {kategori}
+            Menunjukkan {filteredData.length} rekod untuk <span className="ml-2 px-2 py-1 bg-teal-600 text-white rounded text-xs">{jenis} - {kategori}</span>
+            {filterNegeri && <span className="ml-2 px-2 py-1 bg-teal-600 text-white rounded text-xs">{filterNegeri}</span>}
           </div>
+
+          {/* Pie Chart by STATUS KES */}
+          {filteredData.length > 0 && (
+            <div className="mt-6">
+              <div className="text-sm font-semibold mb-3 text-slate-200">
+                Pecahan Status Kes
+              </div>
+              <ReactECharts
+                option={getStatusKESDonutOption(filteredData)}
+                style={{ height: 280 }}
+              />
+            </div>
+          )}
           {filteredData.length > 0 ? (
             <table className="w-full text-sm border-collapse">
               <thead>
@@ -197,16 +214,16 @@ export default function DrilldownPanel() {
                   {/* <th className="py-2">Lokasi</th> */}
                   <th className="py-2">Aktiviti</th>
                   {/* <th className="py-2">Status Kes</th> */}
-                  <th className="py-2">Tindakan</th>
+                  <th className="py-2"></th>
                 </tr>
               </thead>
               <tbody>
                 {filteredData.map((item, index) => (
                   <tr key={index} className="border-b last:border-0">
                     <td className="py-2 align-top">{item.TARIKH}</td>
-                    <td className="py-2 align-top">{item.NEGERI}</td>
+                    <td className="py-2">{item.NEGERI}</td>
                     {/* <td className="py-2">{item.LOKASI}</td> */}
-                    <td className="py-2"><span className="font-medium">{item.AKTIVITI}</span><br/><br/><span className="text-balance">{item.LOKASI}</span></td>
+                    <td className="py-2 px-2"><span className="font-medium">{item["BUTIRAN AKTIVITI"]}</span><br /><span className="text-balance">{item.LOKASI}</span><br/><span className="px-2 py-1 bg-green-700 text-white rounded text-xs">STATUS - {item["STATUS KES"]}</span></td>
                     {/* <td className="py-2">{item["STATUS KES"]}</td> */}
                     <td className="py-2">
                       <button

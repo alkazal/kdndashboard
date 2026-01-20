@@ -22,10 +22,10 @@ export default function Overview({ currentPage, setCurrentPage }) {
   }, []);
 
   return (
-    <div className="dashboard min-h-screen bg-gray-50 dark:bg-black">
+    <div className="dashboard min-h-screen bg-gray-50 dark:bg-gray-900 px-10 py-2">
       <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
       <div className={`p-8 space-y-10 ${selectedCategory ? 'mr-96' : ''}`}>
-        <PageHeader title="STATISTIK LESEN, PERMIT & PRUF" period="Januari - Mei 2026" />
+        <PageHeader title="STATISTIK LESEN & PERMIT" period="Januari - Mei 2026" />
 
       {/* KPI + Charts */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">

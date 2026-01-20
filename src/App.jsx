@@ -6,7 +6,7 @@ import PenguatkuasaanOverview from "./pages/PenguatkuasaanOverview";
 import PNPOverview from "./pages/PNPOverview";
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('overview');
+  const [currentPage, setCurrentPage] = useState('penguatkuasaan');
 
   return currentPage === 'overview' ? 
     <Overview currentPage={currentPage} setCurrentPage={setCurrentPage} /> : 
