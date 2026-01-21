@@ -26,7 +26,7 @@ import { getNegeriJenisBarOption } from "../charts/penguatkuasaan/NegeriJenisBar
 
 import PenguatkuasaanMap from "./PenguatkuasaanMap";
 
-export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) {
+export default function PenguatkuasaanOverview({ currentPage, setCurrentPage, onLogout }) {
      useGSAP(() => {
         gsap.from(".penguatkuasaan-section", {
           opacity: 0,
@@ -58,11 +58,10 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) 
     const [showLaporanLayer, setShowLaporanLayer] = useState(false);
     
     return (
-        <div className="dashboard min-h-screen bg-gray-50 dark:bg-gray-900 px-5 py-2">
-            <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <div className="dashboard min-h-screen px-10 py-2" style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/img/Background.png')" }}>
+            <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} onLogout={onLogout} />
             <div className="p-4 space-y-6">
                 <StatesList onStateSelect={(state) => console.log('Selected state:', state)} />
-                
                 <PageHeader
                     title="STATISTIK PENGUATKUASAAN"
                     period="Januari – Mei 2026"
@@ -73,6 +72,7 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) 
                         setShowLaporanLayer(true);
                     }}
                     laporanActive={showLaporanLayer}
+                    showPenguatkuasaanActions
                 />
                 
                 {/* MAP VIEW */}
@@ -120,7 +120,7 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) 
 
                         {/* PINTU MASUK */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="bg-white rounded-xl shadow p-6">
+                            <div className="bg-gray-700 rounded-xl shadow p-6">
                                 <h2 className="font-semibold mb-4">PINTU MASUK</h2>
 
                                 <ReactECharts
@@ -129,7 +129,7 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) 
                                 />
                             </div>
 
-                            <div className="bg-white rounded-xl shadow p-6">
+                            <div className="bg-gray-700 rounded-xl shadow p-6">
                                 <h2 className="font-semibold mb-4">PINTU MASUK (Utama vs Sekunder)</h2>
 
                                 <ReactECharts
@@ -154,7 +154,7 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage }) 
 
                                     <ReactECharts
                                         option={getLapanganBarOption(statistik.lapangan)}
-                                        style={{ height: 220 }}
+                                        style={{ height: 200 }}
                                         opts={{ renderer: 'canvas' }}
                                     />
                             </div>

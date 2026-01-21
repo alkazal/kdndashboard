@@ -2,7 +2,10 @@ export const getKNPBahasaOption = (knp) => ({
   title: {
     text: 'NASKHAH KNP MENGIKUT BAHASA',
     //subtext: 'Fake Data',
-    left: 'center'
+    left: 'center',
+    textStyle: {
+      color: '#FFF' // Set the desired color (e.g., red)
+    }
   },
   tooltip: { trigger: "item" },
   // legend: {
@@ -13,7 +16,10 @@ export const getKNPBahasaOption = (knp) => ({
     bottom: 0,
     left: 'center',
     orient: 'horizontal',
-    itemGap: 5
+    itemGap: 5,
+    textStyle: {
+      color: '#FFF' // Set the desired color (e.g., red)
+    }
   },
   series: [
     {

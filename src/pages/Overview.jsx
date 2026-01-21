@@ -9,7 +9,7 @@ import Navigation from "../components/Navigation";
 import PageHeader from "../components/PageHeader";
 import { useDashboardStore } from "../store/dashboardStore";
 
-export default function Overview({ currentPage, setCurrentPage }) {
+export default function Overview({ currentPage, setCurrentPage, onLogout }) {
   const selectedCategory = useDashboardStore(s => s.selectedCategory);
   useGSAP(() => {
     gsap.from(".kpi-section", {
@@ -22,8 +22,8 @@ export default function Overview({ currentPage, setCurrentPage }) {
   }, []);
 
   return (
-    <div className="dashboard min-h-screen bg-gray-50 dark:bg-gray-900 px-5 py-2">
-      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
+    <div className="dashboard min-h-screen px-10 py-2" style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/img/Background.png')" }}>
+      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} onLogout={onLogout} />
       <div className={`p-8 space-y-10 ${selectedCategory ? 'mr-96' : ''}`}>
         <PageHeader title="STATISTIK LESEN & PERMIT" period="Januari - Mei 2026" />
 

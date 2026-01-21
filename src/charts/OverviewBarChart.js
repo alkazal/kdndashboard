@@ -8,6 +8,10 @@ export const getOverviewBarOption = (overview) => ({
   },
   yAxis: {
     type: "value",
+    axisLabel: {
+      fontSize: 11,
+      color: '#FFF'
+    },
     splitLine: { lineStyle: { opacity: 0.3 } }
   },
   series: [

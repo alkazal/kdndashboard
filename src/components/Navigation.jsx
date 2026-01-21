@@ -39,7 +39,7 @@ const callsToAction = [
   { name: 'Contact sales', href: '#', icon: PhoneIcon },
 ]
 
-export default function Navigation({ currentPage, setCurrentPage }) {
+export default function Navigation({ currentPage, setCurrentPage, onLogout }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -225,6 +225,7 @@ export default function Navigation({ currentPage, setCurrentPage }) {
                 <MenuItem>
                   <a
                     href="#"
+                    onClick={(e) => { e.preventDefault(); onLogout ? onLogout() : setCurrentPage('login'); }}
                     className="block px-4 py-2 text-sm text-gray-950 data-focus:bg-gray-100 data-focus:outline-hidden"
                   >
                     KELUAR

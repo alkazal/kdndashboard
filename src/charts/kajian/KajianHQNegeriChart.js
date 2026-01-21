@@ -1,14 +1,32 @@
 export const getHQNegeriOption = (data) => ({
   tooltip: { trigger: "axis" },
-  legend: { bottom: 20 },
+  legend: {
+    bottom: 20,
+    textStyle: {
+      color: '#FFF' // Set the desired color (e.g., red)
+    }
+   },
   title: {
     text: 'KAJIAN NASKHAH (HQ vs NEGERI)',
+    textStyle: {
+      color: '#FFF' // Set the desired color (e.g., red)
+    }
   },
   xAxis: {
     type: "category",
-    data: Object.keys(data)
+    data: Object.keys(data),
+    axisLabel: {            
+      fontSize: 11,
+      color: '#FFF'
+    }
   },
-  yAxis: { type: "value" },
+  yAxis: {
+    type: "value",
+    axisLabel: {
+      fontSize: 11,
+      color: '#FFF'
+    }
+   },
   series: [
     {
       name: "HQ",

@@ -8,7 +8,7 @@ import { useDashboardStore } from "../store/dashboardStore";
 
 const containerStyle = {
   width: "100%",
-  height: "calc(100vh - 64px)"
+  height: "calc(100vh - 320px)"
 };
 
 const center = {
@@ -66,6 +66,7 @@ const reportPinSvg = {
 export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer = false, onToggleLaporanLayer }) {
   const [selectedState, setSelectedState] = useState(null);
   const [selectedLaporan, setSelectedLaporan] = useState(null);
+  const [showStateMarkers, setShowStateMarkers] = useState(true);
   const [filters, setFilters] = useState({
     dateFrom: "",
     dateTo: "",
@@ -195,6 +196,16 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
         <label className="flex items-center gap-2 bg-white/90 dark:bg-gray-800/90 px-3 py-2 rounded shadow text-sm text-gray-200 dark:text-gray-100">
           <input
             type="checkbox"
+            checked={showStateMarkers}
+            onChange={() => setShowStateMarkers(v => !v)}
+            className="h-4 w-4"
+          />
+          Papar Negeri
+        </label>
+
+        <label className="flex items-center gap-2 bg-white/90 dark:bg-gray-800/90 px-3 py-2 rounded shadow text-sm text-gray-200 dark:text-gray-100">
+          <input
+            type="checkbox"
             checked={showLaporanLayer}
             onChange={() => onToggleLaporanLayer && onToggleLaporanLayer()}
             className="h-4 w-4"
@@ -300,7 +311,7 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
           zoomControl: true
         }}
       >
-        {states.map((state) => {
+        {showStateMarkers && states.map((state) => {
           const position = {
             lat: Number(state.lat),
             lng: Number(state.long)

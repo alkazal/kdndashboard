@@ -3,41 +3,41 @@
     "state": "Selangor",
     "bil": 1,
     "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
-    "jawatan": 11,
-    "isi": 9,
+    "jawatan": 5,
+    "isi": 3,
     "kosong": 2
   },
   {
     "state": "Selangor",
     "bil": 2,
     "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
-    "jawatan": 621,
-    "isi": 567,
-    "kosong": 54
+    "jawatan": 61,
+    "isi": 50,
+    "kosong": 11
   },
   {
     "state": "Selangor",
     "bil": 3,
     "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
-    "jawatan": 18,
-    "isi": 16,
-    "kosong": 2
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
   },
   {
     "state": "Selangor",
     "bil": 4,
     "nama_jawatan": "Pegawai PDRM (YA)",
-    "jawatan": 7,
-    "isi": 5,
-    "kosong": 2
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
   },
   {
     "state": "Selangor",
     "bil": 5,
     "nama_jawatan": "Pegawai Pentadbiran (N & H)",
-    "jawatan": 179,
-    "isi": 161,
-    "kosong": 18
+    "jawatan": 9,
+    "isi": 8,
+    "kosong": 1
   },
   {
     "state": "Selangor",
@@ -60,25 +60,25 @@
     "state": "Johor",
     "bil": 2,
     "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
-    "jawatan": 621,
-    "isi": 567,
-    "kosong": 54
+    "jawatan": 21,
+    "isi": 50,
+    "kosong": 11
   },
   {
     "state": "Johor",
     "bil": 3,
     "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
-    "jawatan": 18,
-    "isi": 16,
-    "kosong": 2
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
   },
   {
     "state": "Johor",
     "bil": 4,
     "nama_jawatan": "Pegawai PDRM (YA)",
-    "jawatan": 7,
-    "isi": 5,
-    "kosong": 2
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
   },
   {
     "state": "Johor",
@@ -109,9 +109,9 @@
     "state": "Kedah",
     "bil": 2,
     "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
-    "jawatan": 621,
-    "isi": 567,
-    "kosong": 54
+    "jawatan": 21,
+    "isi": 50,
+    "kosong": 11
   },
   {
     "state": "Kedah",
@@ -125,25 +125,25 @@
     "state": "Kedah",
     "bil": 4,
     "nama_jawatan": "Pegawai PDRM (YA)",
-    "jawatan": 7,
-    "isi": 5,
-    "kosong": 2
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
   },
   {
     "state": "Kedah",
     "bil": 5,
     "nama_jawatan": "Pegawai Pentadbiran (N & H)",
-    "jawatan": 179,
-    "isi": 161,
-    "kosong": 18
+    "jawatan": 90,
+    "isi": 8,
+    "kosong": 1
   },
   {
     "state": "Kedah",
     "bil": 6,
     "nama_jawatan": "Pegawai Kewangan (W)",
-    "jawatan": 23,
-    "isi": 19,
-    "kosong": 4
+    "jawatan": 10,
+    "isi": 8,
+    "kosong": 2
   },
 
   {
@@ -297,49 +297,49 @@
     "state": "Pahang",
     "bil": 1,
     "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
-    "jawatan": 11,
-    "isi": 9,
-    "kosong": 2
+    "jawatan": 12,
+    "isi": 12,
+    "kosong": 0
   },
   {
     "state": "Pahang",
     "bil": 2,
     "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
-    "jawatan": 621,
-    "isi": 567,
-    "kosong": 54
+    "jawatan": 21,
+    "isi": 50,
+    "kosong": 11
   },
   {
     "state": "Pahang",
     "bil": 3,
     "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
-    "jawatan": 18,
-    "isi": 16,
-    "kosong": 2
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
   },
   {
     "state": "Pahang",
     "bil": 4,
     "nama_jawatan": "Pegawai PDRM (YA)",
-    "jawatan": 7,
-    "isi": 5,
-    "kosong": 2
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
   },
   {
     "state": "Pahang",
     "bil": 5,
     "nama_jawatan": "Pegawai Pentadbiran (N & H)",
-    "jawatan": 179,
-    "isi": 161,
-    "kosong": 18
+    "jawatan": 90,
+    "isi": 8,
+    "kosong": 1
   },
   {
     "state": "Pahang",
     "bil": 6,
     "nama_jawatan": "Pegawai Kewangan (W)",
-    "jawatan": 23,
-    "isi": 19,
-    "kosong": 4
+    "jawatan": 10,
+    "isi": 8,
+    "kosong": 2
   },
 
   {
@@ -591,49 +591,49 @@
     "state": "Terengganu",
     "bil": 1,
     "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
-    "jawatan": 11,
-    "isi": 9,
-    "kosong": 2
+    "jawatan": 8,
+    "isi": 8,
+    "kosong": 0
   },
   {
     "state": "Terengganu",
     "bil": 2,
     "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
-    "jawatan": 621,
-    "isi": 567,
-    "kosong": 54
+    "jawatan": 62,
+    "isi": 50,
+    "kosong": 11
   },
   {
     "state": "Terengganu",
     "bil": 3,
     "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
-    "jawatan": 18,
-    "isi": 16,
-    "kosong": 2
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
   },
   {
     "state": "Terengganu",
     "bil": 4,
     "nama_jawatan": "Pegawai PDRM (YA)",
-    "jawatan": 7,
-    "isi": 5,
-    "kosong": 2
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
   },
   {
     "state": "Terengganu",
     "bil": 5,
     "nama_jawatan": "Pegawai Pentadbiran (N & H)",
-    "jawatan": 179,
-    "isi": 161,
-    "kosong": 18
+    "jawatan": 90,
+    "isi": 8,
+    "kosong": 1
   },
   {
     "state": "Terengganu",
     "bil": 6,
     "nama_jawatan": "Pegawai Kewangan (W)",
-    "jawatan": 23,
-    "isi": 19,
-    "kosong": 4
+    "jawatan": 10,
+    "isi": 8,
+    "kosong": 2
   },
 
   {
