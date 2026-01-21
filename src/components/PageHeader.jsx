@@ -16,7 +16,8 @@ export default function PageHeader({
   onCOPClick,
   copActive = false,
   onLaporanClick,
-  laporanActive = false
+  laporanActive = false,
+  showPenguatkuasaanActions = false
 }) {
   return (
     <div className="lg:flex lg:items-center lg:justify-between">
@@ -31,6 +32,8 @@ export default function PageHeader({
           </div>
         </div>
       </div>
+      
+      {showPenguatkuasaanActions && (
       <div className="mt-5 flex lg:mt-0 lg:ml-4">
         <span className="hidden sm:block">
           <button
@@ -135,6 +138,7 @@ export default function PageHeader({
           </button>
         </span>
       </div>
+      )}
     </div>
   )
 }

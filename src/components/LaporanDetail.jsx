@@ -68,7 +68,7 @@ export default function LaporanDetail({ record, onClose }) {
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b">
           <div>
-            <div className="text-2xl text-slate-500 font-bold">
+            <div className="text-3xl text-slate-500 font-bold">
               {record.JENIS}
             </div>
             <h2 className="text-xl font-bold text-black">
@@ -170,7 +170,7 @@ export default function LaporanDetail({ record, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="flex justify-end gap-3 p-6 border-t bg-slate-300">
+        <div className="flex justify-end gap-3 p-6 border-t bg-slate-700">
           <button className="flex items-center gap-2 px-4 py-2 rounded bg-white border">
             <PrinterIcon className="w-4 h-4" /> Cetak
           </button>
@@ -201,7 +201,7 @@ function Info({ label, value, block }) {
       </div>
       <div
         className={`${
-          block ? "bg-slate-50 p-3 rounded" : ""
+          block ? "bg-slate-100 p-3 rounded" : ""
         }`}
       >
         {value || "-"}

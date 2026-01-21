@@ -3,9 +3,15 @@ export const getStatusDonutOption = (pruf) => ({
   title: {
     text: 'JUMLAH KESELURUHAN',
     left: 'center',
-    top:5
+    top: 5,
+    textStyle: {
+      color: '#FFF',
+    }
   },
-  legend: { bottom: 0 },
+  legend: {
+    bottom: 0,
+    textStyle: { color: '#FFF' }
+   },
   series: [
     {
       type: "pie",

@@ -1,0 +1,75 @@
+@keyframes moveOverlay {
+  0% { transform: translateY(-100%); }
+  50% { transform: translateY(100%); }
+  100% { transform: translateY(-100%); }
+}
+
+.bg-shiny {
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  /* filter: brightness(0.1); */
+}
+
+/*Logo + text animation (slide from top)*/
+.logo-text {
+  transform: translateY(-6rem);
+  opacity: 0;
+  transition: transform 0.7s ease-out, opacity 0.7s ease-out;
+  position: relative;
+  z-index: 10;
+}
+
+.logo-text.animate-in {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/*Slide up animation for logo+text when login clicked (slide up and fade out)*/
+.logo-text.slide-up {
+  animation: slideUpAndFade 0.7s ease-in forwards;
+}
+
+/*Login card animation (slide from bottom)*/
+.login-card {
+  transform: translateY(6rem);
+  opacity: 0;
+  transition: transform 0.7s ease-out 0.2s,
+              opacity 0.7s ease-out 0.2s;
+  position: relative;
+  z-index: 10;
+}
+
+.login-card.animate-in {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/*Slide down animation for cards when login clicked*/
+.login-card.slide-down {
+  animation: slideDownAndFade 0.7s ease-in forwards;
+}
+
+/*Keyframe animations*/
+@keyframes slideUpAndFade {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10rem);
+    opacity: 0;
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(10rem);
+    opacity: 0;
+  }
+}
+

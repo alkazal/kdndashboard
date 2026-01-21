@@ -37,9 +37,9 @@ export default function EnforcementTable({ title, rows, jenis, operasiData }) {
     const dataEntries = Object.entries(filteredRows);
 
   return (
-    <div className="bg-white rounded-xl shadow p-6">
+    <div className="bg-amber-100 rounded-xl shadow p-6">
       <div className="flex items-center justify-between mb-2">
-        <h3 className="font-semibold">{title}</h3>
+        <h3 className="font-semibold text-xl">{title}</h3>
         {(filterNegeri || filterJenis) && (
           <span className="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded">
             Filtered
@@ -58,8 +58,8 @@ export default function EnforcementTable({ title, rows, jenis, operasiData }) {
                 onClick={() => openDrilldown(rowCategory, { category: key, value: value, jenis: jenis })}
                 className={`border-b cursor-pointer transition-colors ${
                   isSelected
-                    ? 'bg-teal-50 border-teal-200 hover:bg-teal-100'
-                    : 'hover:bg-teal-200'
+                    ? 'bg-teal-50 border-teal-200 hover:bg-amber-200'
+                    : 'hover:bg-amber-200'
                 }`}
               >
                 <td className={`py-2 font-medium ${isSelected ? 'text-teal-800' : ''}`}>{key}</td>

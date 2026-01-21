@@ -1,12 +1,25 @@
 export const getCategoryBreakdownOption = (data) => ({
   tooltip: { trigger: "axis" },
-  legend: { bottom: 0 },
+  legend: {
+    bottom: 0,
+    textStyle: { color: '#FFF' }
+   },
   grid: { left: 40, right: 20, top: 30, bottom: 60 },
   xAxis: {
     type: "category",
+    axisLabel: {
+      fontSize: 11,
+      color: '#FFF'
+    },
     data: data.breakdown.map(b => b.type)
   },
-  yAxis: { type: "value" },
+  yAxis: {
+    type: "value",
+    axisLabel: {
+      fontSize: 11,
+      color: '#FFF'
+    }
+   },
   series: [
     {
       name: "Mohon",

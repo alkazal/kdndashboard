@@ -4,6 +4,7 @@ import ReactECharts from "echarts-for-react";
 
 import Navigation from "../components/Navigation";
 import PageHeader from "../components/PageHeader";
+import StatesList from "../components/StatesList";
 import KPIBlock from "../components/KPIBlock";
 import DrilldownPanel from "../components/DrilldownPanel";
 
@@ -19,7 +20,7 @@ import { getHQNegeriOption } from "../charts/kajian/KajianHQNegeriChart";
 import { getKNPBahasaOption } from "../charts/kajian/KNPBahasaChart";
 import { getLaranganSummaryOption } from "../charts/kajian/LaranganSummaryChart";
 
-export default function KajianOverview({ currentPage, setCurrentPage }) {
+export default function KajianOverview({ currentPage, setCurrentPage, onLogout }) {
   useGSAP(() => {
     gsap.from(".kajian-section", {
       opacity: 0,
@@ -31,9 +32,10 @@ export default function KajianOverview({ currentPage, setCurrentPage }) {
   }, []);
 
   return (
-    <div className="dashboard min-h-screen bg-gray-50 dark:bg-gray-900 px-5 py-2">
-      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
+    <div className="dashboard min-h-screen px-10 py-2" style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/img/Background.png')" }}>
+      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} onLogout={onLogout} />
       <div className="p-4 space-y-6">
+        <StatesList onStateSelect={(state) => console.log('Selected state:', state)} />
         <PageHeader title="STATISTIK KAJIAN & PERINTAH LARANGAN" period={overview.period} />
 
       {/* Total Kajian */}

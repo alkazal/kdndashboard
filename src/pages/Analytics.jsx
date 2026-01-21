@@ -4,7 +4,7 @@ import gsap from "gsap";
 import Navigation from "../components/Navigation";
 import PageHeader from "../components/PageHeader";
 
-export default function Analytics({ currentPage, setCurrentPage }) {
+export default function Analytics({ currentPage, setCurrentPage, onLogout }) {
   useGSAP(() => {
     gsap.from(".analytics-card", {
       opacity: 0,
@@ -16,8 +16,8 @@ export default function Analytics({ currentPage, setCurrentPage }) {
   }, []);
 
   return (
-    <div className="dashboard min-h-screen bg-gray-50 dark:bg-gray-900">
-      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
+    <div className="dashboard min-h-screen" style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/img/Background.png')" }}>
+      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} onLogout={onLogout} />
       <div className="p-8 space-y-10">
         <PageHeader title="Analytics Dashboard" period="Last 30 days" />
 
