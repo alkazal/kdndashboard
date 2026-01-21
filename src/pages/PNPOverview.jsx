@@ -28,7 +28,7 @@ export default function PNPOverview({ currentPage, setCurrentPage }) {
   }, []);
 
     return (
-      <div className="dashboard min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="dashboard min-h-screen bg-gray-50 dark:bg-gray-900 px-5 py-2">
             <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
 
             <div className={`p-8 space-y-10 ${selectedCategory ? 'mr-96' : ''}`}>

@@ -50,7 +50,20 @@ export default function LaporanDetail({ record, onClose }) {
 
       <div
         ref={containerRef}
-        className="bg-slate-300 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl shadow-lg" style={{ opacity: '100' }}
+        className="bg-slate-300 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl shadow-lg
+        /* Scrollbar height */
+            [&::-webkit-scrollbar]:h-2
+            /* Track background */
+            [&::-webkit-scrollbar-track]:bg-transparent
+            /* Thumb styling */
+            [&::-webkit-scrollbar-thumb]:rounded-full
+            [&::-webkit-scrollbar-thumb]:bg-indigo-400/50
+            hover:[&::-webkit-scrollbar-thumb]:bg-indigo-400
+            /* Dark mode thumb */
+            dark:[&::-webkit-scrollbar-thumb]:bg-gray-600
+            /* Firefox support */
+            [scrollbar-width:thin]
+            [scrollbar-color:theme(colors.indigo.400/50%)_transparent]" style={{ opacity: '100' }}
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b">

@@ -62,8 +62,8 @@ export default function Navigation({ currentPage, setCurrentPage }) {
               />
             </div>
             <div className="flex flex-col">
-              <h2 className="text-lg font-bold text-sky-500">KDN - PENGUATKUASAAN & KAWALAN</h2>
-              <h3 className="text-sm text-gray-700">KEMENTERIAN DALAM NEGERI MALAYSIA</h3>
+              <h2 className="text-lg font-bold text-amber-400">BAHAGIAN PENGUATKUASAAN & KAWALAN</h2>
+              <h3 className="text-sm text-gray-700">KEMENTERIAN DALAM NEGERI</h3>
             </div>
           </a>
         </div>
@@ -79,7 +79,7 @@ export default function Navigation({ currentPage, setCurrentPage }) {
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12 items-center">
           <Popover className="relative">
-            <PopoverButton className={`flex items-center gap-x-1 text-sm/6 font-semibold ${currentPage === 'penguatkuasaan' ? 'text-indigo-600' : 'text-gray-900'}`}>
+            <PopoverButton className={`flex items-center gap-x-1 text-sm/2 font-semibold ${currentPage === 'penguatkuasaan' ? 'text-indigo-400' : 'text-gray-900'}`}>
               PENGUATKUASAAN
               <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
             </PopoverButton>
@@ -133,35 +133,35 @@ export default function Navigation({ currentPage, setCurrentPage }) {
 
           <a href="#"
             onClick={() => setCurrentPage('kajian')}
-            className={`text-sm/6 font-semibold ${currentPage === 'kajian' ? 'text-indigo-600' : 'text-gray-900'}`}
+            className={`text-sm/6 font-semibold ${currentPage === 'kajian' ? 'text-indigo-400' : 'text-gray-900'}`}
             aria-current={currentPage === 'kajian' ? 'page' : undefined}
           >
             KAJIAN & PERINTAH LARANGAN
           </a>
           <a href="#"
             onClick={() => setCurrentPage('pruf')}
-            className={`text-sm/6 font-semibold ${currentPage === 'pruf' ? 'text-indigo-600' : 'text-gray-900'}`}
+            className={`text-sm/6 font-semibold ${currentPage === 'pruf' ? 'text-indigo-400' : 'text-gray-900'}`}
             aria-current={currentPage === 'pruf' ? 'page' : undefined}
           >
             PRUF (AL-QURAN)
           </a>
           <a href="#"
             onClick={() => setCurrentPage('overview')}
-            className={`text-sm/6 font-semibold ${currentPage === 'overview' ? 'text-indigo-600' : 'text-gray-900'}`}
+            className={`text-sm/6 font-semibold ${currentPage === 'overview' ? 'text-indigo-400' : 'text-gray-900'}`}
             aria-current={currentPage === 'overview' ? 'page' : undefined}
           >
             LESEN & PERMIT
           </a>
           <a href="#"
             onClick={() => setCurrentPage('dasar')}
-            className={`text-sm/6 font-semibold ${currentPage === 'dasar' ? 'text-indigo-600' : 'text-gray-900'}`}
+            className={`text-sm/6 font-semibold ${currentPage === 'dasar' ? 'text-indigo-400' : 'text-gray-900'}`}
             aria-current={currentPage === 'dasar' ? 'page' : undefined}
           >
             DASAR
           </a>
           <a href="#"
             onClick={() => setCurrentPage('seranta')}
-            className={`text-sm/6 font-semibold ${currentPage === 'seranta' ? 'text-indigo-600' : 'text-gray-900'}`}
+            className={`text-sm/6 font-semibold ${currentPage === 'seranta' ? 'text-indigo-400' : 'text-gray-900'}`}
             aria-current={currentPage === 'seranta' ? 'page' : undefined}
           >
             SERANTA & KORPORAT
@@ -211,7 +211,7 @@ export default function Navigation({ currentPage, setCurrentPage }) {
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-950 data-focus:bg-gray-100 data-focus:outline-hidden"
                   >
-                    ARIF RAMLI 
+                    MOHD ARIF RAMLI 
                   </a>
                 </MenuItem>
                 <MenuItem>
@@ -219,7 +219,7 @@ export default function Navigation({ currentPage, setCurrentPage }) {
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-950 data-focus:bg-gray-100 data-focus:outline-hidden"
                   >
-                    Settings
+                    TETAPAN
                   </a>
                 </MenuItem>
                 <MenuItem>
@@ -227,7 +227,7 @@ export default function Navigation({ currentPage, setCurrentPage }) {
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-950 data-focus:bg-gray-100 data-focus:outline-hidden"
                   >
-                    Keluar
+                    KELUAR
                   </a>
                 </MenuItem>
               </MenuItems>
