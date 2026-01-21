@@ -1,9 +1,9 @@
 [
     {
         "TARIKH": "2026-01-02",
-	"JENIS":"AMCP 1984",
-	"KATEGORI":"OPERASI",
-	"NEGERI": "PULAU PINANG",
+        "JENIS":"AMCP 1984",
+        "KATEGORI":"OPERASI",
+        "NEGERI": "PULAU PINANG",
         "LOKASI": "BILLION SHOPPING CENTRE, JALAN TODAK 3, PRAI, PULAU PINANG.",
         "KETUA OPERASI": "AHMAD SHAFIQ BIN IBRAHIM",
         "AKTIVITI": "PENGUATKUASAAN DI BAWAH AKTA AMCP 1984",
@@ -12,7 +12,9 @@
         "GAMBAR": "image1.jpeg, image2.jpeg, image3.jpeg",
         "TINDAKAN": "LAPORAN",
         "STATUS KES": "TIADA",
-        "ID": 1
+        "ID": 1,
+        "LATITUDE": 5.3745,
+        "LONGITUDE": 100.3067
     },
     {
         "TARIKH": "2026-01-02",
@@ -27,7 +29,9 @@
         "GAMBAR": "image14.jpeg, image10.jpeg",
         "TINDAKAN": "LAPORAN",
         "STATUS KES": "MAHKAMAH",
-        "ID": 7
+        "ID": 7,
+        "LATITUDE": 5.3163,
+        "LONGITUDE": 100.2774
     },
     {
         "TARIKH": "2026-01-09",
@@ -42,7 +46,9 @@
         "GAMBAR": "image14.jpeg, image10.jpeg",
         "TINDAKAN": "LAPORAN",
         "STATUS KES": "MAHKAMAH",
-        "ID": 10
+        "ID": 10,
+        "LATITUDE": 5.4231,
+        "LONGITUDE": 100.3294
     },
     {
         "TARIKH": "2026-01-09",
@@ -57,7 +63,9 @@
         "GAMBAR": "image14.jpeg, image10.jpeg",
         "TINDAKAN": "LAPORAN",
         "STATUS KES": "SELESAI",
-        "ID": 11
+        "ID": 11,
+        "LATITUDE": 5.4140,
+        "LONGITUDE": 100.3288
     },
     {
         "TARIKH": "2026-01-12",
@@ -72,7 +80,9 @@
         "GAMBAR": "image14.jpeg, image10.jpeg",
         "TINDAKAN": "LAPORAN",
         "STATUS KES": "TIADA",
-        "ID": 12
+        "ID": 12,
+        "LATITUDE": 5.2976,
+        "LONGITUDE": 100.2591
     },
     {
         "TARIKH": "2026-01-01",
@@ -87,7 +97,9 @@
         "GAMBAR": "image8.jpeg, image6.jpeg",
         "TINDAKAN": "LAPORAN",
         "STATUS KES": "TIADA",
-        "ID": 8
+        "ID": 8,
+        "LATITUDE": 3.0458,
+        "LONGITUDE": 101.6065
     },
     {
         "TARIKH": "2026-01-01",
@@ -102,7 +114,9 @@
         "GAMBAR": "image4.jpeg, image5.jpeg",
         "TINDAKAN": "LAPORAN",
         "STATUS KES": "TIADA",
-        "ID": 2
+        "ID": 2,
+        "LATITUDE": 3.8078,
+        "LONGITUDE": 103.3266
     },
     {
         "TARIKH": "2026-01-01",
@@ -117,7 +131,9 @@
         "GAMBAR": "image5.jpeg, image14.jpeg",
         "TINDAKAN": "LAPORAN",
         "STATUS KES": "TIADA",
-        "ID": 9
+        "ID": 9,
+        "LATITUDE": 1.4927,
+        "LONGITUDE": 103.7414
     },
     {
         "TARIKH": "2026-01-02",
@@ -132,7 +148,9 @@
         "GAMBAR": "image7.jpeg, image8.jpeg",
         "TINDAKAN": "LAPORAN",
         "STATUS KES": "TIADA",
-        "ID": 3
+        "ID": 3,
+        "LATITUDE": 5.3745,
+        "LONGITUDE": 100.3067
     },
     {
         "TARIKH": "2026-01-03",
@@ -147,7 +165,9 @@
         "GAMBAR": "image10.jpeg, image11.jpeg, image12.jpeg",
         "TINDAKAN": "KERTAS SIASATAN DIBUKA",
         "STATUS KES": "KOMPAUN RM2.500.00",
-        "ID": 4
+        "ID": 4,
+        "LATITUDE": 3.8078,
+        "LONGITUDE": 103.3266
     },
     {
         "TARIKH": "2026-01-03",
@@ -162,7 +182,9 @@
         "GAMBAR": "image13.jpeg, image14.jpeg",
         "TINDAKAN": "LAPORAN",
         "STATUS KES": "TIADA",
-        "ID": 5
+        "ID": 5,
+        "LATITUDE": 5.3745,
+        "LONGITUDE": 100.3067
     },
     {
         "TARIKH": "2026-01-05",
@@ -177,6 +199,8 @@
         "GAMBAR": "image6.jpeg, image9.jpeg",
         "TINDAKAN": "LAPORAN",
         "STATUS KES": "TIADA",
-        "ID": 6
+        "ID": 6,
+        "LATITUDE": 3.0738,
+        "LONGITUDE": 101.5183
     }
 ]

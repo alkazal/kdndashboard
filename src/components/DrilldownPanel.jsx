@@ -49,14 +49,20 @@ const kajianCategoryLabels = {
 
 export default function DrilldownPanel() {
   const panelRef = useRef(null);
-  const { selectedCategory, closeDrilldown, openLaporanDetail, filterNegeri } = useDashboardStore();
+  const {
+    selectedCategory,
+    selectedPerjawatan,
+    closeDrilldown,
+    openLaporanDetail,
+    filterNegeri
+  } = useDashboardStore();
 
   // Get category label - check Kajian labels first, then main overview
   const categoryData = overview.cards?.find(c => c.key === selectedCategory);
   const categoryLabel = categoryData ? categoryData.label : (kajianCategoryLabels[selectedCategory] || selectedCategory);
 
   useEffect(() => {
-    if (selectedCategory) {
+    if (selectedCategory || selectedPerjawatan) {
       gsap.from(panelRef.current, {
         x: 500,
         opacity: 0,
@@ -64,9 +70,9 @@ export default function DrilldownPanel() {
         ease: "power2.out"
       });
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, selectedPerjawatan]);
 
-  if (!selectedCategory) return null;
+  if (!selectedCategory && !selectedPerjawatan) return null;
 
   const data = dataMap[selectedCategory];
   const monthlyData = monthly[selectedCategory] || kajianMonthly[selectedCategory];
@@ -267,6 +273,74 @@ export default function DrilldownPanel() {
       </table>
     );
   };
+
+  if (selectedPerjawatan) {
+    const { stateName, summary = { jawatan: 0, isi: 0, kosong: 0 }, rows = [] } = selectedPerjawatan;
+    const vacancyRate = summary.jawatan > 0 ? ((summary.kosong / summary.jawatan) * 100).toFixed(1) : "0.0";
+
+    return (
+      <div
+        ref={panelRef}
+        className="fixed right-0 top-0 h-full w-lg bg-white shadow-xl p-6 z-50 overflow-y-auto"
+      >
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <div className="text-sm text-slate-200">Ringkasan Penjawatan</div>
+            <h2 className="text-xl font-bold text-slate-100">{stateName}</h2>
+          </div>
+          <button
+            onClick={closeDrilldown}
+            className="text-slate-500 hover:text-black"
+          >
+            <XMarkIcon className="w-6 h-6" />
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="rounded-lg bg-slate-100 p-4 text-center">
+            <div className="text-xs text-slate-500">Jawatan</div>
+            <div className="text-2xl font-bold text-slate-900">{summary.jawatan || 0}</div>
+          </div>
+          <div className="rounded-lg bg-emerald-100 p-4 text-center">
+            <div className="text-xs text-emerald-700">Isi</div>
+            <div className="text-2xl font-bold text-emerald-800">{summary.isi || 0}</div>
+          </div>
+          <div className="rounded-lg bg-rose-100 p-4 text-center">
+            <div className="text-xs text-rose-700">Kosong</div>
+            <div className="text-2xl font-bold text-rose-800">{summary.kosong || 0}</div>
+          </div>
+          <div className="rounded-lg bg-indigo-100 p-4 text-center">
+            <div className="text-xs text-indigo-700">Vacancy Rate</div>
+            <div className="text-2xl font-bold text-indigo-800">{vacancyRate}%</div>
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <div className="text-sm font-semibold mb-3 text-slate-300">Pecahan Mengikut Jawatan</div>
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="text-left text-slate-500 border-b">
+                <th className="py-2">Nama Jawatan</th>
+                <th className="py-2 text-right">Jawatan</th>
+                <th className="py-2 text-right">Isi</th>
+                <th className="py-2 text-right">Kosong</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, idx) => (
+                <tr key={`${row.nama_jawatan}-${idx}`} className="border-b last:border-0">
+                  <td className="py-2">{row.nama_jawatan}</td>
+                  <td className="py-2 text-right">{row.jawatan}</td>
+                  <td className="py-2 text-right">{row.isi}</td>
+                  <td className="py-2 text-right">{row.kosong}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
