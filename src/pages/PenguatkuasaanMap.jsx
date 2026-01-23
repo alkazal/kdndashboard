@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { GoogleMap, InfoWindow, Marker, useLoadScript } from "@react-google-maps/api";
 import ReactECharts from "echarts-for-react";
-import states from "../../public/maps/states.json"; // copied from uploaded file
+import states from "../maps/states.json"; // copied from uploaded file
 import statesPerjawatanInfo from "../data/penguatkuasaan/statesPerjawatanInfo.json";
 import laporanData from "../data/penguatkuasaan/laporan.json";
 import { useDashboardStore } from "../store/dashboardStore";
