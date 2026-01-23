@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../pages/login/Login.css";
+import "../pages/login/login.css";
 
 export default function Login({ onLoginSuccess }) {
   const [animate, setAnimate] = useState(false);       // initial page animation
