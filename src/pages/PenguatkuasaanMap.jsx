@@ -67,6 +67,7 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
   const [selectedState, setSelectedState] = useState(null);
   const [selectedLaporan, setSelectedLaporan] = useState(null);
   const [showStateMarkers, setShowStateMarkers] = useState(true);
+  const [selectedStateFilter, setSelectedStateFilter] = useState("");
   const [filters, setFilters] = useState({
     dateFrom: "",
     dateTo: "",
@@ -90,6 +91,25 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
       return acc;
     }, {});
   }, []);
+
+  const stateFilterOptions = useMemo(() => {
+    const uniqueStates = [...new Set(statesPerjawatanInfo.map(item => item.state))];
+    return uniqueStates.sort();
+  }, []);
+
+  const filteredPerjawatanData = useMemo(() => {
+    if (!selectedStateFilter) return statesPerjawatanInfo;
+    return statesPerjawatanInfo.filter(item => item.state === selectedStateFilter);
+  }, [selectedStateFilter]);
+
+  const perjawatanTotals = useMemo(() => {
+    return filteredPerjawatanData.reduce((acc, item) => {
+      acc.jawatan += Number(item.jawatan || 0);
+      acc.isi += Number(item.isi || 0);
+      acc.kosong += Number(item.kosong || 0);
+      return acc;
+    }, { jawatan: 0, isi: 0, kosong: 0 });
+  }, [filteredPerjawatanData]);
 
   const filterOptions = useMemo(() => ({
     jenis: [...new Set(laporanData.map(l => l.JENIS).filter(Boolean))],
@@ -200,8 +220,79 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
             onChange={() => setShowStateMarkers(v => !v)}
             className="h-4 w-4"
           />
-          Papar Negeri
+          Papar Penjawatan
         </label>
+
+        {showStateMarkers && (
+          <div className="bg-white/90 dark:bg-gray-800/90 px-3 py-3 rounded shadow space-y-2">
+            <div className="text-xs font-semibold text-gray-200 dark:text-gray-200">TAPIS PENJAWATAN</div>
+            
+            <select
+              value={selectedStateFilter}
+              onChange={(e) => setSelectedStateFilter(e.target.value)}
+              className="w-full text-xs px-2 py-1 rounded border dark:bg-gray-700 dark:text-gray-100"
+            >
+              <option value="">Semua Negeri</option>
+              {stateFilterOptions.map(state => (
+                <option key={state} value={state}>{state}</option>
+              ))}
+            </select>
+
+            {/* KPI Cards */}
+            <div className="pt-2 border-t border-gray-300 dark:border-gray-600">
+              <div className="text-xs font-semibold text-gray-200 dark:text-gray-200 mb-2">
+                {selectedStateFilter ? `STATUS PENJAWATAN - ${selectedStateFilter}` : 'JUMLAH PENJAWATAN'}
+              </div>
+              <div className="grid grid-cols-3 gap-2 text-xs">
+                <div className="bg-blue-600 text-white rounded p-2 text-center">
+                  <div className="text-lg font-bold">{perjawatanTotals.jawatan}</div>
+                  <div className="text-[10px]">Jawatan</div>
+                </div>
+                <div className="bg-green-600 text-white rounded p-2 text-center">
+                  <div className="text-lg font-bold">{perjawatanTotals.isi}</div>
+                  <div className="text-[10px]">Isi</div>
+                </div>
+                <div className="bg-red-600 text-white rounded p-2 text-center">
+                  <div className="text-lg font-bold">{perjawatanTotals.kosong}</div>
+                  <div className="text-[10px]">Kosong</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Breakdown Table */}
+            {selectedStateFilter && filteredPerjawatanData.length > 0 && (
+              <div className="pt-2 border-t border-gray-300 dark:border-gray-600">
+                <div className="text-xs font-semibold text-gray-200 dark:text-gray-200 mb-2">
+                  PECAHAN MENGIKUT JAWATAN
+                </div>
+                <div className="max-h-60 overflow-y-auto">
+                  <table className="w-full text-[10px] border-collapse">
+                    <thead className="sticky top-0 bg-gray-200 dark:bg-gray-700">
+                      <tr>
+                        <th className="border border-gray-300 dark:border-gray-600 px-1 py-1 text-left text-gray-700">Bil</th>
+                        <th className="border border-gray-300 dark:border-gray-600 px-1 py-1 text-left text-gray-700">Nama Jawatan</th>
+                        <th className="border border-gray-300 dark:border-gray-600 px-1 py-1 text-center text-gray-700">Jawatan</th>
+                        <th className="border border-gray-300 dark:border-gray-600 px-1 py-1 text-center text-gray-700">Isi</th>
+                        <th className="border border-gray-300 dark:border-gray-600 px-1 py-1 text-center text-gray-700">Kosong</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white dark:bg-gray-800">
+                      {filteredPerjawatanData.map((row, idx) => (
+                        <tr key={idx} className="hover:bg-gray-100 dark:hover:bg-gray-700">
+                          <td className="border border-gray-300 dark:border-gray-600 px-1 py-1 text-center">{row.bil}</td>
+                          <td className="border border-gray-300 dark:border-gray-600 px-1 py-1">{row.nama_jawatan}</td>
+                          <td className="border border-gray-300 dark:border-gray-600 px-1 py-1 text-center font-semibold">{row.jawatan}</td>
+                          <td className="border border-gray-300 dark:border-gray-600 px-1 py-1 text-center text-green-700 dark:text-green-400">{row.isi}</td>
+                          <td className="border border-gray-300 dark:border-gray-600 px-1 py-1 text-center text-red-700 dark:text-red-400">{row.kosong}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         <label className="flex items-center gap-2 bg-white/90 dark:bg-gray-800/90 px-3 py-2 rounded shadow text-sm text-gray-200 dark:text-gray-100">
           <input

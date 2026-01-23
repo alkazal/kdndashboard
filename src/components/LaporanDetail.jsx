@@ -1,10 +1,14 @@
 import { XMarkIcon, PrinterIcon, DocumentArrowDownIcon } from "@heroicons/react/24/outline";
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
+import jsPDF from "jspdf";
+import { domToPng } from 'modern-screenshot';
 
 export default function LaporanDetail({ record, onClose }) {
   const containerRef = useRef(null);
+  const contentRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
 
   useEffect(() => {
     gsap.from(containerRef.current, {
@@ -14,6 +18,120 @@ export default function LaporanDetail({ record, onClose }) {
       ease: "power2."
     });
   }, []);
+
+  const handleGeneratePDF = async () => {
+    setIsGeneratingPDF(true);
+    
+    try {
+      // Get the content element to convert to PDF
+      const element = contentRef.current;
+      
+      // Use modern-screenshot to capture the element as PNG
+      const dataUrl = await domToPng(element, {
+        quality: 0.95,
+        scale: 2,
+        backgroundColor: '#cbd5e1',
+      });
+      
+      // Create an image to get dimensions
+      const img = new Image();
+      img.src = dataUrl;
+      
+      await new Promise((resolve) => {
+        img.onload = resolve;
+      });
+
+      // Calculate PDF dimensions
+      const imgWidth = 210; // A4 width in mm
+      const pageHeight = 297; // A4 height in mm
+      const imgHeight = (img.height * imgWidth) / img.width;
+      let heightLeft = imgHeight;
+
+      // Create PDF
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+
+      // Add image to PDF
+      pdf.addImage(dataUrl, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      // Add new pages if content is longer than one page
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(dataUrl, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      // Generate filename
+      const filename = `Laporan_${record.JENIS}_${record.NEGERI}_${record.TARIKH}.pdf`.replace(/\s+/g, '_');
+      
+      // Save and preview
+      pdf.save(filename);
+      
+      // Open in new tab for preview
+      const pdfBlob = pdf.output('blob');
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+      window.open(pdfUrl, '_blank');
+      
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Ralat semasa menjana PDF. Sila cuba lagi.');
+    } finally {
+      setIsGeneratingPDF(false);
+    }
+  };
+
+  const handlePrint = () => {
+    // Clone the content for printing
+    const contentToPrint = contentRef.current.cloneNode(true);
+    
+    // Remove elements that shouldn't be printed
+    const elementsToRemove = contentToPrint.querySelectorAll('.print\\:hidden');
+    elementsToRemove.forEach(el => el.remove());
+    
+    // Create a print container
+    const printContainer = document.createElement('div');
+    printContainer.id = 'print-container-temp';
+    printContainer.style.cssText = 'display: none;';
+    printContainer.appendChild(contentToPrint);
+    document.body.appendChild(printContainer);
+    
+    // Add print-specific styles
+    const printStyle = document.createElement('style');
+    printStyle.id = 'print-style-laporan';
+    printStyle.innerHTML = `
+      @media print {
+        @page {
+          margin: 0.5cm;
+        }
+        
+        /* Hide everything */
+        body > *:not(#print-container-temp) {
+          display: none !important;
+        }
+        
+        /* Show only the print container */
+        #print-container-temp {
+          display: block !important;
+          background-color: #cbd5e1 !important;
+          padding: 20px !important;
+        }
+      }
+    `;
+    document.head.appendChild(printStyle);
+    
+    // Trigger print
+    window.print();
+    
+    // Clean up after print dialog closes
+    setTimeout(() => {
+      const styleElement = document.getElementById('print-style-laporan');
+      const containerElement = document.getElementById('print-container-temp');
+      if (styleElement) styleElement.remove();
+      if (containerElement) containerElement.remove();
+    }, 1000);
+  };
 
   if (!record) return null;
 
@@ -65,6 +183,7 @@ export default function LaporanDetail({ record, onClose }) {
             [scrollbar-width:thin]
             [scrollbar-color:theme(colors.indigo.400/50%)_transparent]" style={{ opacity: '100' }}
       >
+        <div ref={contentRef} data-pdf-content id="laporan-print-content">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b">
           <div>
@@ -78,7 +197,7 @@ export default function LaporanDetail({ record, onClose }) {
 
           <button
             onClick={onClose}
-            className="text-slate-500 hover:text-black"
+            className="text-slate-500 hover:text-black print:hidden"
           >
             <XMarkIcon className="w-6 h-6" />
           </button>
@@ -168,14 +287,23 @@ export default function LaporanDetail({ record, onClose }) {
             />
           </section>
         </div>
+        </div>
 
         {/* Footer */}
-        <div className="flex justify-end gap-3 p-6 border-t bg-slate-700">
-          <button className="flex items-center gap-2 px-4 py-2 rounded bg-white border">
+        <div className="flex justify-end gap-3 p-6 border-t bg-slate-700 print:hidden">
+          <button 
+            className="flex items-center gap-2 px-4 py-2 rounded bg-white border hover:bg-gray-100 transition-colors"
+            onClick={handlePrint}
+          >
             <PrinterIcon className="w-4 h-4" /> Cetak
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 rounded bg-primary">
-            <DocumentArrowDownIcon className="w-4 h-4" /> Muat Turun PDF
+          <button 
+            className="flex items-center gap-2 px-4 py-2 rounded bg-primary hover:bg-indigo-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            onClick={handleGeneratePDF}
+            disabled={isGeneratingPDF}
+          >
+            <DocumentArrowDownIcon className="w-4 h-4" /> 
+            {isGeneratingPDF ? 'Menjana PDF...' : 'Muat Turun PDF'}
           </button>
         </div>
       </div>
