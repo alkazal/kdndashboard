@@ -1,0 +1,3 @@
+# Only login page + login folder owned by login team
+/src/pages/login.jsx     @ynursyakirahjaankhan-gif
+/src/pages/login/        @nursyakirahjaankhan-gif
