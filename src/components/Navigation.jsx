@@ -211,7 +211,7 @@ export default function Navigation({ currentPage, setCurrentPage, onLogout }) {
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-950 data-focus:bg-gray-100 data-focus:outline-hidden"
                   >
-                    MOHD ARIF RAMLI 
+                    Mohd Arif Ramli 
                   </a>
                 </MenuItem>
                 <MenuItem>
@@ -219,7 +219,7 @@ export default function Navigation({ currentPage, setCurrentPage, onLogout }) {
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-950 data-focus:bg-gray-100 data-focus:outline-hidden"
                   >
-                    TETAPAN
+                    Tetapan
                   </a>
                 </MenuItem>
                 <MenuItem>
@@ -228,7 +228,7 @@ export default function Navigation({ currentPage, setCurrentPage, onLogout }) {
                     onClick={(e) => { e.preventDefault(); onLogout ? onLogout() : setCurrentPage('login'); }}
                     className="block px-4 py-2 text-sm text-gray-950 data-focus:bg-gray-100 data-focus:outline-hidden"
                   >
-                    KELUAR
+                    Keluar
                   </a>
                 </MenuItem>
               </MenuItems>

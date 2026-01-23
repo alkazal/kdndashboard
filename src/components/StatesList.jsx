@@ -1,4 +1,4 @@
-import statesData from "../../public/maps/states.json";
+import statesData from "../maps/states.json";
 import { useDashboardStore } from "../store/dashboardStore";
 
 export default function StatesList({ onStateSelect }) {
