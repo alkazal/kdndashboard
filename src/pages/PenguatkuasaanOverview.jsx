@@ -58,7 +58,7 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage, on
     const [showLaporanLayer, setShowLaporanLayer] = useState(false);
     
     return (
-        <div className="dashboard min-h-screen px-10 py-2" style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/img/Background.png')" }}>
+        <div className="dashboard min-h-screen px-10 py-2 bg-shiny">
             <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} onLogout={onLogout} />
             <div className="p-4 space-y-6">
                 <StatesList onStateSelect={(state) => console.log('Selected state:', state)} />
