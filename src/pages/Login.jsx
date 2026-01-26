@@ -29,7 +29,7 @@ export default function Login({ onLoginSuccess }) {
         <div className="relative min-h-screen flex flex-col items-center justify-center
           bg-shiny
           overflow-hidden text-gray-100"
-          style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/img/Background.png')" }}>
+          >
 
        <div className={`flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 logo-text ${animate ? "animate-in" : ""} ${
           loginClicked ? "slide-up" : ""

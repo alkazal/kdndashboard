@@ -4,11 +4,40 @@
   100% { transform: translateY(-100%); }
 }
 
+@keyframes moveOverlayDiagonal {          /*diagonal movement*/
+  0% {
+    transform: translate(-30%, -30%);
+  }
+  50% {
+    transform: translate(30%, 30%);
+  }
+  100% {
+    transform: translate(-30%, -30%);
+  }
+}
+
 .bg-shiny {
   background-size: cover;
   background-position: center;
   position: relative;
-  /* filter: brightness(0.1); */
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),      /*dark overlay bg image*/
+    url('/img/Background.png') center / cover no-repeat;
+}
+
+.bg-shiny::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(
+    135deg,                    /*diagonal gradient*/
+    rgba(255,255,255,0)40%,
+    rgba(255,255,255,0.1)50%,
+    rgba(255,255,255,0)60%
+  );
+  animation: moveOverlayDiagonal 8s linear infinite; /*diagonal motion*/
+  z-index: 1;
+  pointer-events: none;
 }
 
 /*Logo + text animation (slide from top)*/
