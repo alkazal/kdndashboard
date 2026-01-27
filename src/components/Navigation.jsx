@@ -62,8 +62,8 @@ export default function Navigation({ currentPage, setCurrentPage, onLogout }) {
               />
             </div>
             <div className="flex flex-col">
-              <h2 className="text-lg font-bold text-amber-400">BAHAGIAN PENGUATKUASAAN & KAWALAN</h2>
-              <h3 className="text-sm text-gray-700">KEMENTERIAN DALAM NEGERI</h3>
+              <h2 className="text-lg font-bold text-amber-400">KDN PK</h2>
+              <h3 className="text-sm text-gray-700">SMART DASHBOARD</h3>
             </div>
           </a>
         </div>
