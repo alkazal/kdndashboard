@@ -20,24 +20,33 @@
   background-size: cover;
   background-position: center;
   position: relative;
-  background:
-    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),      /*dark overlay bg image*/
-    url('/img/Background.png') center / cover no-repeat;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('/img/Background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .bg-shiny::before {
   content: "";
   position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   inset: -20%;
   background: linear-gradient(
-    135deg,                    /*diagonal gradient*/
-    rgba(255,255,255,0)40%,
-    rgba(255,255,255,0.1)50%,
-    rgba(255,255,255,0)60%
+    135deg,
+    rgba(255,255,255,0) 40%,
+    rgba(255,255,255,0.1) 50%,
+    rgba(255,255,255,0) 60%
   );
-  animation: moveOverlayDiagonal 8s linear infinite; /*diagonal motion*/
+  animation: moveOverlayDiagonal 8s linear infinite;
   z-index: 1;
   pointer-events: none;
+  will-change: transform;
 }
 
 /*Logo + text animation (slide from top)*/
