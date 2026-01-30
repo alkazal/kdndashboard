@@ -1,4 +1,5 @@
 import fs from "fs";
+import path from "path";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -6,8 +7,8 @@ const openai = new OpenAI({
 });
 
 const readJson = (relativePath) => {
-  const fileUrl = new URL(relativePath, import.meta.url);
-  const raw = fs.readFileSync(fileUrl, "utf-8");
+  const filePath = path.join(process.cwd(), relativePath);
+  const raw = fs.readFileSync(filePath, "utf-8");
   return JSON.parse(raw);
 };
 
@@ -27,26 +28,6 @@ const takeSample = (data, limit = 10) => {
   return [];
 };
 
-const statistik = readJson("../src/data/penguatkuasaan/statistik.json");
-const operasi = readJson("../src/data/penguatkuasaan/operasi.json");
-const laporan = readJson("../src/data/penguatkuasaan/laporan.json");
-const penjawatan = readJson(
-  "../src/data/penguatkuasaan/statesPerjawatanInfo.json"
-);
-
-const DEFAULT_CONTEXT = `
-DATA PENGUATKUASAAN:
-${JSON.stringify(statistik)}
-
-CONTOH OPERASI:
-${JSON.stringify(takeSample(operasi, 10))}
-
-LAPORAN PENGUATKUASAAN:
-${JSON.stringify(takeSample(laporan, 10))}
-
-DATA PENJAWATAN:
-${JSON.stringify(penjawatan)}
-`;
 
 const readBody = async (req) => {
   if (req.body) return req.body;
@@ -76,6 +57,34 @@ export default async function handler(req, res) {
   }
 
   try {
+    if (!process.env.OPENAI_API_KEY) {
+      res.statusCode = 500;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ error: "OPENAI_API_KEY is not set" }));
+      return;
+    }
+
+    const statistik = readJson("src/data/penguatkuasaan/statistik.json");
+    const operasi = readJson("src/data/penguatkuasaan/operasi.json");
+    const laporan = readJson("src/data/penguatkuasaan/laporan.json");
+    const penjawatan = readJson(
+      "src/data/penguatkuasaan/statesPerjawatanInfo.json"
+    );
+
+    const DEFAULT_CONTEXT = `
+DATA PENGUATKUASAAN:
+${JSON.stringify(statistik)}
+
+CONTOH OPERASI:
+${JSON.stringify(takeSample(operasi, 10))}
+
+LAPORAN PENGUATKUASAAN:
+${JSON.stringify(takeSample(laporan, 10))}
+
+DATA PENJAWATAN:
+${JSON.stringify(penjawatan)}
+`;
+
     const body = await readBody(req);
     const { question, context } =
       typeof body === "string" ? JSON.parse(body) : body || {};
