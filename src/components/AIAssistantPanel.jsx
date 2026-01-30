@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 
 export default function AIAssistantPanel({ open, onClose }) {
   const panelRef = useRef(null);
@@ -88,7 +89,7 @@ export default function AIAssistantPanel({ open, onClose }) {
             onClick={() => onClose?.()}
             className="text-xs px-2 py-1 rounded bg-slate-100 text-slate-400 hover:bg-slate-200"
           >
-            ← Kembali
+            <ChevronLeftIcon className="w-6 h-6" />
           </button>
           <span className="text-lg">AI Assistant</span>
         </div>
@@ -127,12 +128,12 @@ export default function AIAssistantPanel({ open, onClose }) {
           className="flex-1 border rounded px-3 py-2 text-sm"
           placeholder="Tanya data atau statistik…"
         />
-        <button
+        {/* <button
           onClick={submit}
           className="bg-primary text-black px-4 rounded"
         >
           Hantar
-        </button>
+        </button> */}
       </div>
     </div>
   );
