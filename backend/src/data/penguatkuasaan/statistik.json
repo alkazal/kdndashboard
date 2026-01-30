@@ -1,0 +1,25 @@
+{
+  "lapangan": {
+    "pemeriksaan": 3012,
+    "operasi": 2864,
+    "operasi_bersepadu": 98,
+    "premis_diperiksa": 5972,
+    "naskhah_ditahan": 43338,
+    "filem_dirampas": 6125
+  },
+
+  "pintu_masuk": {
+    "jumlah_pemeriksaan": 5565,
+    "jumlah_konsainan": 143051
+  },
+
+  "pintu_masuk_utama": {
+    "pemeriksaan": 2553,
+    "konsainan": 112236
+  },
+
+  "pintu_masuk_sekunder": {
+    "pemeriksaan": 3012,
+    "konsainan": 30815
+  }
+}

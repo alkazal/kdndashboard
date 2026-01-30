@@ -1,0 +1,29 @@
+{
+  "AMCP_1984": [
+    {
+      "id": "AMCP-001",
+      "tarikh": "2023-02-14",
+      "negeri": "Selangor",
+      "lokasi": "Pelabuhan Klang",
+      "jenis": "Naskhah Ditahan",
+      "jumlah": 5177,
+      "pegawai": "Unit Penguatkuasaan",
+      "catatan": "Rampasan buku import tanpa kelulusan"
+    }
+  ],
+
+  "APTQ_1986": [
+    {
+      "id": "APTQ-018",
+      "tarikh": "2023-03-05",
+      "negeri": "Johor",
+      "lokasi": "Gudang Logistik Senai",
+      "jenis": "Naskhah Ditahan",
+      "jumlah": 640,
+      "catatan": "Cetakan al-Quran tidak mematuhi piawaian"
+    }
+  ],
+
+  "APF_2002": [],
+  "AAP_1971": []
+}

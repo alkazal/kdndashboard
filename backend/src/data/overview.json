@@ -1,0 +1,14 @@
+{
+  "totals": {
+    "pp": 3140,
+    "lmc": 2772,
+    "lmcq": 45,
+    "pruf": 931
+  },
+  "cards": [
+    { "key": "PP", "label": "PERMIT PENERBITAN", "value": 3140 },
+    { "key": "LMC", "label": "LESEN MESIN CETAK", "value": 2772 },
+    { "key": "LMCQ", "label": "LESEN MESIN CETAK AL-QURAN", "value": 45 },
+    { "key": "PRUF", "label": "PRUF AKHIR TEKS AL-QURAN", "value": 931 }
+  ]
+}

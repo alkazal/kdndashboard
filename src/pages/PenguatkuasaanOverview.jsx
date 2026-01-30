@@ -14,6 +14,7 @@ import AAP from "../data/penguatkuasaan/statistikAAP.json";
 import EnforcementTable from "../components/EnforcementTable";
 import DrilldownPanel from "../components/DrilldownPanel";
 import LaporanDetail from "../components/LaporanDetail";
+import AIAssistantPanel from "../components/AIAssistantPanel";
 
 import statistik from "../data/penguatkuasaan/statistik.json";
 import { getLapanganBarOption } from "../charts/penguatkuasaan/LapanganBarChart";
@@ -25,6 +26,7 @@ import { groupByNegeriJenis } from "../utils/groupByNegeriJenis";
 import { getNegeriJenisBarOption } from "../charts/penguatkuasaan/NegeriJenisBarChart";
 
 import PenguatkuasaanMap from "./PenguatkuasaanMap";
+
 
 export default function PenguatkuasaanOverview({ currentPage, setCurrentPage, onLogout }) {
      useGSAP(() => {
@@ -56,6 +58,8 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage, on
 
     const [showMap, setShowMap] = useState(false);
     const [showLaporanLayer, setShowLaporanLayer] = useState(false);
+
+    const [aiOpen, setAiOpen] = useState(false);
     
     return (
         <div className="dashboard min-h-screen px-10 py-2 bg-shiny overflow-hidden text-gray-100">
@@ -65,6 +69,8 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage, on
                 <PageHeader
                     title="STATISTIK PENGUATKUASAAN"
                     period="Januari – Mei 2026"
+                    onAIClick={() => setAiOpen((v) => !v)}
+                    aiActive={aiOpen}
                     onCOPClick={() => setShowMap((v) => !v)}
                     copActive={showMap}
                     onLaporanClick={() => {
@@ -160,6 +166,8 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage, on
                             </div>
                         {/* </div> */}
                     
+                            
+
                         {/* LAPORAN NEGERI JENIS */}
                         <div className="penguatkuasaan-section">
                             <div className="dark:bg-gray-800 rounded-xl shadow p-6">
@@ -192,7 +200,10 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage, on
                         </div>
                 </>
                 )}
-
+                                <AIAssistantPanel
+                                    open={aiOpen}
+                                    onClose={() => setAiOpen(false)}
+                                />
                 <DrilldownPanel />
                 <LaporanDetailModal />
             </div>

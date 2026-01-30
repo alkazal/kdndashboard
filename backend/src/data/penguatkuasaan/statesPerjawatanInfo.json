@@ -1,0 +1,722 @@
+[
+  {
+    "state": "Selangor",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 5,
+    "isi": 3,
+    "kosong": 2
+  },
+  {
+    "state": "Selangor",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
+  },
+  {
+    "state": "Selangor",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
+  },
+  {
+    "state": "Selangor",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
+  },
+  {
+    "state": "Selangor",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 9,
+    "isi": 8,
+    "kosong": 1
+  },
+  {
+    "state": "Selangor",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 7,
+    "isi": 7,
+    "kosong": 0
+  },
+  {
+    "state": "Johor",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 11,
+    "isi": 9,
+    "kosong": 2
+  },
+  {
+    "state": "Johor",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
+  },
+  {
+    "state": "Johor",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
+  },
+  {
+    "state": "Johor",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
+  },
+  {
+    "state": "Johor",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 12,
+    "isi": 12,
+    "kosong": 0
+  },
+  {
+    "state": "Johor",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 7,
+    "isi": 7,
+    "kosong": 0
+  },
+  {
+    "state": "Kedah",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
+  },
+  {
+    "state": "Kedah",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
+  },
+  {
+    "state": "Kedah",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 8,
+    "isi": 8,
+    "kosong": 0
+  },
+  {
+    "state": "Kedah",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
+  },
+  {
+    "state": "Kedah",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 6,
+    "isi": 6,
+    "kosong": 0
+  },
+  {
+    "state": "Kedah",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 10,
+    "isi": 8,
+    "kosong": 2
+  },
+  {
+    "state": "Kelantan",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 11,
+    "isi": 9,
+    "kosong": 2
+  },
+  {
+    "state": "Kelantan",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
+  },
+  {
+    "state": "Kelantan",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 5,
+    "isi": 5,
+    "kosong": 0
+  },
+  {
+    "state": "Kelantan",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 7,
+    "isi": 5,
+    "kosong": 2
+  },
+  {
+    "state": "Kelantan",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 7,
+    "isi": 7,
+    "kosong": 0
+  },
+  {
+    "state": "Kelantan",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 5,
+    "isi": 5,
+    "kosong": 0
+  },
+  {
+    "state": "Melaka",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 11,
+    "isi": 9,
+    "kosong": 2
+  },
+  {
+    "state": "Melaka",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
+  },
+  {
+    "state": "Melaka",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 8,
+    "isi": 8,
+    "kosong": 0
+  },
+  {
+    "state": "Melaka",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 7,
+    "isi": 5,
+    "kosong": 2
+  },
+  {
+    "state": "Melaka",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 8,
+    "isi": 8,
+    "kosong": 0
+  },
+  {
+    "state": "Melaka",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 6,
+    "isi": 6,
+    "kosong": 0
+  },
+  {
+    "state": "N. Sembilan",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 11,
+    "isi": 9,
+    "kosong": 2
+  },
+  {
+    "state": "N. Sembilan",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 16,
+    "isi": 16,
+    "kosong": 0
+  },
+  {
+    "state": "N. Sembilan",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 18,
+    "isi": 16,
+    "kosong": 2
+  },
+  {
+    "state": "N. Sembilan",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 7,
+    "isi": 5,
+    "kosong": 2
+  },
+  {
+    "state": "N. Sembilan",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 13,
+    "isi": 13,
+    "kosong": 0
+  },
+  {
+    "state": "N. Sembilan",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 23,
+    "isi": 19,
+    "kosong": 4
+  },
+  {
+    "state": "Pahang",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 12,
+    "isi": 12,
+    "kosong": 0
+  },
+  {
+    "state": "Pahang",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 21,
+    "isi": 10,
+    "kosong": 11
+  },
+  {
+    "state": "Pahang",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
+  },
+  {
+    "state": "Pahang",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
+  },
+  {
+    "state": "Pahang",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 12,
+    "isi": 12,
+    "kosong": 0
+  },
+  {
+    "state": "Pahang",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 10,
+    "isi": 8,
+    "kosong": 2
+  },
+  {
+    "state": "Perak",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 11,
+    "isi": 9,
+    "kosong": 2
+  },
+  {
+    "state": "Perak",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 21,
+    "isi": 21,
+    "kosong": 0
+  },
+  {
+    "state": "Perak",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 11,
+    "isi": 11,
+    "kosong": 0
+  },
+  {
+    "state": "Perak",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 9,
+    "isi": 5,
+    "kosong": 4
+  },
+  {
+    "state": "Perak",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 17,
+    "isi": 16,
+    "kosong": 1
+  },
+  {
+    "state": "Perak",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 15,
+    "isi": 8,
+    "kosong": 4
+  },
+  {
+    "state": "Perlis",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 11,
+    "isi": 9,
+    "kosong": 2
+  },
+  {
+    "state": "Perlis",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
+  },
+  {
+    "state": "Perlis",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 16,
+    "isi": 11,
+    "kosong": 5
+  },
+  {
+    "state": "Perlis",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 9,
+    "isi": 5,
+    "kosong": 4
+  },
+  {
+    "state": "Perlis",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 17,
+    "isi": 16,
+    "kosong": 1
+  },
+  {
+    "state": "Perlis",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 15,
+    "isi": 8,
+    "kosong": 4
+  },
+  {
+    "state": "Pulau Pinang",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 11,
+    "isi": 9,
+    "kosong": 2
+  },
+  {
+    "state": "Pulau Pinang",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
+  },
+  {
+    "state": "Pulau Pinang",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 16,
+    "isi": 11,
+    "kosong": 5
+  },
+  {
+    "state": "Pulau Pinang",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 9,
+    "isi": 5,
+    "kosong": 4
+  },
+  {
+    "state": "Pulau Pinang",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 17,
+    "isi": 16,
+    "kosong": 1
+  },
+  {
+    "state": "Pulau Pinang",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 15,
+    "isi": 8,
+    "kosong": 4
+  },
+  {
+    "state": "Sabah",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 11,
+    "isi": 9,
+    "kosong": 2
+  },
+  {
+    "state": "Sabah",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 8,
+    "isi": 8,
+    "kosong": 0
+  },
+  {
+    "state": "Sabah",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 11,
+    "isi": 11,
+    "kosong": 0
+  },
+  {
+    "state": "Sabah",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 9,
+    "isi": 9,
+    "kosong": 0
+  },
+  {
+    "state": "Sabah",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 7,
+    "isi": 7,
+    "kosong": 0
+  },
+  {
+    "state": "Sabah",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 15,
+    "isi": 8,
+    "kosong": 4
+  },
+  {
+    "state": "Sarawak",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 11,
+    "isi": 9,
+    "kosong": 2
+  },
+  {
+    "state": "Sarawak",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 5,
+    "isi": 5,
+    "kosong": 0
+  },
+  {
+    "state": "Sarawak",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 16,
+    "isi": 11,
+    "kosong": 5
+  },
+  {
+    "state": "Sarawak",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 9,
+    "isi": 5,
+    "kosong": 4
+  },
+  {
+    "state": "Sarawak",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
+  },
+  {
+    "state": "Sarawak",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 5,
+    "isi": 5,
+    "kosong": 0
+  },
+  {
+    "state": "Terengganu",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 8,
+    "isi": 8,
+    "kosong": 0
+  },
+  {
+    "state": "Terengganu",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
+  },
+  {
+    "state": "Terengganu",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
+  },
+  {
+    "state": "Terengganu",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
+  },
+  {
+    "state": "Terengganu",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 10,
+    "isi": 10,
+    "kosong": 0
+  },
+  {
+    "state": "Terengganu",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 10,
+    "isi": 8,
+    "kosong": 2
+  },
+  {
+    "state": "Kuala Lumpur",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 11,
+    "isi": 9,
+    "kosong": 2
+  },
+  {
+    "state": "Kuala Lumpur",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 6,
+    "isi": 6,
+    "kosong": 0
+  },
+  {
+    "state": "Kuala Lumpur",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 16,
+    "isi": 11,
+    "kosong": 5
+  },
+  {
+    "state": "Kuala Lumpur",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 9,
+    "isi": 5,
+    "kosong": 4
+  },
+  {
+    "state": "Kuala Lumpur",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 4,
+    "isi": 4,
+    "kosong": 0
+  },
+  {
+    "state": "Kuala Lumpur",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 5,
+    "isi": 5,
+    "kosong": 0
+  },
+  {
+    "state": "HQ Putrajaya",
+    "bil": 1,
+    "nama_jawatan": "Pegawai Tadbir dan Diplomatik (M)",
+    "jawatan": 11,
+    "isi": 9,
+    "kosong": 2
+  },
+  {
+    "state": "HQ Putrajaya",
+    "bil": 2,
+    "nama_jawatan": "Pegawai Penguat Kuasa (KP)",
+    "jawatan": 8,
+    "isi": 8,
+    "kosong": 0
+  },
+  {
+    "state": "HQ Putrajaya",
+    "bil": 3,
+    "nama_jawatan": "Pegawai Hal Ehwal Islam (S)",
+    "jawatan": 6,
+    "isi": 6,
+    "kosong": 0
+  },
+  {
+    "state": "Putrajaya",
+    "bil": 4,
+    "nama_jawatan": "Pegawai PDRM (YA)",
+    "jawatan": 9,
+    "isi": 5,
+    "kosong": 4
+  },
+  {
+    "state": "HQ Putrajaya",
+    "bil": 5,
+    "nama_jawatan": "Pegawai Pentadbiran (N & H)",
+    "jawatan": 6,
+    "isi": 6,
+    "kosong": 0
+  },
+  {
+    "state": "Putrajaya",
+    "bil": 6,
+    "nama_jawatan": "Pegawai Kewangan (W)",
+    "jawatan": 15,
+    "isi": 8,
+    "kosong": 4
+  }
+]

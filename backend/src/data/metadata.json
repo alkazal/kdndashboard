@@ -1,0 +1,9 @@
+{
+  "period": {
+    "start": "2030-01",
+    "end": "2030-05",
+    "label": "Januari – Mei 2030"
+  },
+  "categories": ["PP", "LMC", "LMCQ", "PRUF"],
+  "statuses": ["Mohon", "Lulus", "LDP", "Tolak"]
+}

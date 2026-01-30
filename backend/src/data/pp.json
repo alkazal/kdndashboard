@@ -1,0 +1,21 @@
+{
+  "category": "PP",
+  "total": 186,
+  "breakdown": [
+    {
+      "type": "Baharu",
+      "mohon": 21,
+      "lulus": 21
+    },
+    {
+      "type": "Pertukaran",
+      "mohon": 53,
+      "lulus": 53
+    },
+    {
+      "type": "Pembatalan",
+      "mohon": 112,
+      "lulus": 112
+    }
+  ]
+}

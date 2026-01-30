@@ -1,0 +1,30 @@
+{
+  "PP": [
+    { "month": "Jan", "count": 30 },
+    { "month": "Feb", "count": 35 },
+    { "month": "Mar", "count": 42 },
+    { "month": "Apr", "count": 39 },
+    { "month": "May", "count": 40 }
+  ],
+  "LMC": [
+    { "month": "Jan", "count": 14 },
+    { "month": "Feb", "count": 16 },
+    { "month": "Mar", "count": 18 },
+    { "month": "Apr", "count": 17 },
+    { "month": "May", "count": 16 }
+  ],
+  "LMCQ": [
+    { "month": "Jan", "count": 10 },
+    { "month": "Feb", "count": 2 },
+    { "month": "Mar", "count": 12 },
+    { "month": "Apr", "count": 8 },
+    { "month": "May", "count": 5 }
+  ],
+  "PRUF": [
+    { "month": "Jan", "count": 180 },
+    { "month": "Feb", "count": 195 },
+    { "month": "Mar", "count": 187 },
+    { "month": "Apr", "count": 185 },
+    { "month": "May", "count": 184 }
+  ]
+}

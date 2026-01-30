@@ -6,13 +6,16 @@ import {
   LinkIcon,
   MapPinIcon,
   ChevronLeftIcon,
-  TruckIcon
+  TruckIcon,
+  SparklesIcon
 } from '@heroicons/react/20/solid'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 
 export default function PageHeader({
   title = 'STATISTIK LESEN & PERMIT',
   period = 'Januari - Mei 2026',
+  onAIClick,
+  aiActive = false,
   onCOPClick,
   copActive = false,
   onLaporanClick,
@@ -34,8 +37,28 @@ export default function PageHeader({
       </div>
       
       {showPenguatkuasaanActions && (
-      <div className="mt-5 flex lg:mt-0 lg:ml-4">
+      <div className="mt-5 flex lg:mt-0 lg:ml-4 ml-3">
         <span className="hidden sm:block">
+          <button
+            type="button"
+            onClick={onAIClick}
+            aria-pressed={aiActive}
+            className={`inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold shadow-xs inset-ring inset-ring-gray-300 dark:inset-ring-gray-600 transition
+              ${aiActive
+                ? ' text-white hover:bg-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-400 inset-ring-gray-900'
+                : ' text-gray-900 hover:bg-gray-50 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700'}`}
+          >
+            <img
+              src="/img/AIA.png"
+              alt="AI Assistant"
+              className="size-5 mr-1.5 -ml-0.5"
+            />
+            <span className="">AI Assistant</span>
+              {/* <SparklesIcon aria-hidden="true" className="mr-1.5 -ml-0.5 size-5 outline-neutral-700" /> */}
+          </button>
+        </span>
+
+        <span className="ml-3 hidden sm:block">
           <button
             type="button"
             onClick={onCOPClick}

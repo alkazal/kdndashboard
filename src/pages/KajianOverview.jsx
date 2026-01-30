@@ -53,8 +53,8 @@ export default function KajianOverview({ currentPage, setCurrentPage, onLogout }
           />
         </div>
 
-        <div className="bg-slate-600 rounded-xl shadow p-4">
-          <div className="text-xl font-semibold mb-3 text-slate-950">
+        <div className="bg-slate-100 rounded-xl shadow p-4">
+          <div className="text-xl font-semibold mb-3 text-slate-900">
             PERINTAH LARANGAN
           </div>
 
