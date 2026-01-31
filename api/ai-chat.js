@@ -12,17 +12,16 @@ const readJson = (relativePath) => {
   return JSON.parse(raw);
 };
 
-const takeSample = (data, limit = 10) => {
+const normalizeAll = (data) => {
   if (Array.isArray(data)) {
-    return data.slice(0, limit);
+    return data;
   }
 
   if (data && typeof data === "object") {
     const values = Object.values(data);
-    const flattened = values.flatMap((value) =>
+    return values.flatMap((value) =>
       Array.isArray(value) ? value : [value]
     );
-    return flattened.slice(0, limit);
   }
 
   return [];
@@ -76,10 +75,10 @@ DATA PENGUATKUASAAN:
 ${JSON.stringify(statistik)}
 
 CONTOH OPERASI:
-${JSON.stringify(takeSample(operasi, 10))}
+${JSON.stringify(normalizeAll(operasi))}
 
 LAPORAN PENGUATKUASAAN:
-${JSON.stringify(takeSample(laporan, 10))}
+${JSON.stringify(normalizeAll(laporan))}
 
 DATA PENJAWATAN:
 ${JSON.stringify(penjawatan)}
