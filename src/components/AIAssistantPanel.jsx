@@ -1,12 +1,20 @@
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function AIAssistantPanel({ open, onClose }) {
   const panelRef = useRef(null);
   const messagesRef = useRef(null);
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    {
+      role: "assistant",
+      content:
+        "Selamat datang! Saya AI Assistant. Tanyakan data, statistik, atau ringkasan yang anda perlukan."
+    }
+  ]);
 
   useEffect(() => {
     gsap.to(panelRef.current, {
@@ -109,23 +117,30 @@ export default function AIAssistantPanel({ open, onClose }) {
                 : "bg-primary text-black"
             }`}
           >
-            {m.content}
+            {m.role === "assistant" ? (
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {m.content}
+              </ReactMarkdown>
+            ) : (
+              m.content
+            )}
           </div>
         ))}
       </div>
 
       {/* Input */}
       <div className="p-4 border-t flex gap-2">
-        <input
+        <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
+            if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
               submit();
             }
           }}
-          className="flex-1 border rounded px-3 py-2 text-sm"
+          rows={3}
+          className="flex-1 border rounded px-3 py-2 text-sm resize-none"
           placeholder="Tanya data atau statistik…"
         />
         {/* <button
