@@ -85,7 +85,7 @@ ${JSON.stringify(penjawatan)}
 `;
 
     const body = await readBody(req);
-    const { question, context, mode, answer } =
+    const { question, context, mode, answer, preferredType } =
       typeof body === "string" ? JSON.parse(body) : body || {};
     const resolvedContext = context || DEFAULT_CONTEXT;
 
@@ -106,6 +106,9 @@ Skema:
 
 Jika data tidak mencukupi untuk carta, balas:
 {"error":"NOT_ENOUGH_DATA"}
+
+Keutamaan jenis carta (jika sesuai):
+${preferredType || ""}
 
 Soalan pengguna:
 ${question || ""}
@@ -137,6 +140,12 @@ ${resolvedContext}
         chart = JSON.parse(chartCompletion.choices[0].message.content || "{}");
       } catch (parseError) {
         chart = { error: "NOT_ENOUGH_DATA" };
+      }
+
+      if (preferredType && ["bar", "line", "pie"].includes(preferredType)) {
+        if (chart && !chart.error) {
+          chart.type = preferredType;
+        }
       }
 
       res.statusCode = 200;
