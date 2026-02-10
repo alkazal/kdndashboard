@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import ReactECharts from "echarts-for-react";
 
 export default function AIAssistantPanel({ open, onClose }) {
   const panelRef = useRef(null);
@@ -12,7 +13,10 @@ export default function AIAssistantPanel({ open, onClose }) {
     {
       role: "assistant",
       content:
-        "Selamat datang! Saya AI Assistant. Tanyakan data, statistik, atau ringkasan yang anda perlukan."
+        "Selamat datang! Saya AI Assistant. Tanyakan data, statistik, atau ringkasan yang anda perlukan.",
+      chart: null,
+      chartLoading: false,
+      chartError: null
     }
   ]);
 
@@ -70,16 +74,140 @@ export default function AIAssistantPanel({ open, onClose }) {
 
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: answer }
+        {
+          role: "assistant",
+          content: answer,
+          chart: null,
+          chartLoading: false,
+          chartError: null
+        }
       ]);
     } catch (error) {
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: "Ralat rangkaian. Sila cuba lagi."
+          content: "Ralat rangkaian. Sila cuba lagi.",
+          chart: null,
+          chartLoading: false,
+          chartError: null
         }
       ]);
+    }
+  };
+
+  const updateMessageAt = (index, updater) => {
+    setMessages((prev) =>
+      prev.map((msg, i) => (i === index ? updater(msg) : msg))
+    );
+  };
+
+  const buildChartOption = (chart) => {
+    if (!chart || !chart.type) return null;
+
+    const title = chart.title || "Carta Analitik";
+    const labels = Array.isArray(chart.labels) ? chart.labels : [];
+    const values = Array.isArray(chart.values) ? chart.values : [];
+    const unit = chart.unit || "";
+
+    if (chart.type === "pie") {
+      return {
+        title: { text: title, left: "center" },
+        tooltip: { trigger: "item" },
+        legend: { top: "bottom" },
+        series: [
+          {
+            type: "pie",
+            radius: "55%",
+            data: labels.map((label, idx) => ({
+              name: label,
+              value: values[idx] ?? 0
+            }))
+          }
+        ]
+      };
+    }
+
+    const seriesType = chart.type === "line" ? "line" : "bar";
+
+    return {
+      title: { text: title, left: "center" },
+      tooltip: { trigger: "axis" },
+      grid: { left: 30, right: 20, bottom: 40, top: 60 },
+      xAxis: {
+        type: "category",
+        data: labels
+      },
+      yAxis: {
+        type: "value",
+        name: unit
+      },
+      series: [
+        {
+          type: seriesType,
+          data: values
+        }
+      ]
+    };
+  };
+
+  const generateChart = async (index, question, answer) => {
+    updateMessageAt(index, (msg) => ({
+      ...msg,
+      chartLoading: true,
+      chartError: null
+    }));
+
+    try {
+      const res = await fetch("/api/ai-chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question,
+          answer,
+          mode: "chart"
+        })
+      });
+
+      const text = await res.text();
+      let data = null;
+
+      try {
+        data = text ? JSON.parse(text) : null;
+      } catch (parseError) {
+        data = null;
+      }
+
+      if (!res.ok || !data) {
+        updateMessageAt(index, (msg) => ({
+          ...msg,
+          chartLoading: false,
+          chartError: data?.error || "Gagal menjana carta."
+        }));
+        return;
+      }
+
+      if (data?.chart?.error) {
+        updateMessageAt(index, (msg) => ({
+          ...msg,
+          chartLoading: false,
+          chartError: "Tiada data mencukupi untuk carta."
+        }));
+        return;
+      }
+
+      updateMessageAt(index, (msg) => ({
+        ...msg,
+        chartLoading: false,
+        chartError: null,
+        chart: data?.chart || null
+      }));
+    } catch (error) {
+      updateMessageAt(index, (msg) => ({
+        ...msg,
+        chartLoading: false,
+        chartError: "Ralat rangkaian. Sila cuba lagi."
+      }));
     }
   };
 
@@ -118,9 +246,45 @@ export default function AIAssistantPanel({ open, onClose }) {
             }`}
           >
             {m.role === "assistant" ? (
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {m.content}
-              </ReactMarkdown>
+              <div className="space-y-3">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {m.content}
+                </ReactMarkdown>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      generateChart(i, messages[i - 1]?.content, m.content)
+                    }
+                    className="text-xs px-3 py-1 rounded bg-white/60 hover:bg-white text-slate-700"
+                    disabled={
+                      m.chartLoading ||
+                      !messages[i - 1] ||
+                      messages[i - 1].role !== "user"
+                    }
+                  >
+                    {m.chartLoading ? "Menjana..." : "Jana carta"}
+                  </button>
+                  {m.chartError ? (
+                    <span className="text-xs text-red-600">
+                      {m.chartError}
+                    </span>
+                  ) : null}
+                </div>
+                {m.chart ? (
+                  <div className="bg-white/80 rounded p-2">
+                    <ReactECharts
+                      option={buildChartOption(m.chart)}
+                      style={{ height: 240, width: "100%" }}
+                    />
+                    {m.chart.note ? (
+                      <div className="text-xs text-slate-500 mt-2">
+                        {m.chart.note}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
             ) : (
               m.content
             )}

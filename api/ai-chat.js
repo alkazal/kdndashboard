@@ -85,9 +85,69 @@ ${JSON.stringify(penjawatan)}
 `;
 
     const body = await readBody(req);
-    const { question, context } =
+    const { question, context, mode, answer } =
       typeof body === "string" ? JSON.parse(body) : body || {};
     const resolvedContext = context || DEFAULT_CONTEXT;
+
+    if (mode === "chart") {
+      const chartPrompt = `
+Anda perlu menjana spesifikasi carta daripada jawapan AI dan konteks data.
+Balas HANYA dalam JSON yang sah, tiada teks tambahan.
+
+Skema:
+{
+  "type": "bar" | "line" | "pie",
+  "title": "string",
+  "labels": ["string"],
+  "values": [number],
+  "unit": "string" | "",
+  "note": "string" | ""
+}
+
+Jika data tidak mencukupi untuk carta, balas:
+{"error":"NOT_ENOUGH_DATA"}
+
+Soalan pengguna:
+${question || ""}
+
+Jawapan AI:
+${answer || ""}
+
+Konteks data:
+${resolvedContext}
+`;
+
+      const chartCompletion = await openai.chat.completions.create({
+        model: "gpt-4.1-mini",
+        messages: [
+          {
+            role: "system",
+            content:
+              "Anda ialah pembantu analitik. Anda hanya membalas JSON yang sah untuk spesifikasi carta."
+          },
+          {
+            role: "user",
+            content: chartPrompt
+          }
+        ]
+      });
+
+      let chart = null;
+      try {
+        chart = JSON.parse(chartCompletion.choices[0].message.content || "{}");
+      } catch (parseError) {
+        chart = { error: "NOT_ENOUGH_DATA" };
+      }
+
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.end(
+        JSON.stringify({
+          chart
+        })
+      );
+      return;
+    }
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4.1-mini",
