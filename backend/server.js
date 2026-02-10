@@ -61,8 +61,73 @@ ${JSON.stringify(penjawatan)}
 
 app.post("/api/ai-chat", async (req, res) => {
   try {
-    const { question, context } = req.body;
+    const { question, context, mode, answer, preferredType } = req.body;
     const resolvedContext = context || DEFAULT_CONTEXT;
+
+    if (mode === "chart") {
+      const chartPrompt = `
+Anda ialah pembantu analitik. Berdasarkan soalan dan jawapan di bawah, bina data carta yang sesuai.
+Pulangkan JSON SAHAJA dengan format:
+{
+  "type": "bar" | "line" | "pie",
+  "title": "...",
+  "labels": ["..."],
+  "values": [0],
+  "unit": "...",
+  "note": "..." (pilihan)
+}
+
+Jika data tidak mencukupi untuk carta yang munasabah, pulangkan:
+{ "error": "INSUFFICIENT_DATA" }
+
+Keutamaan jenis carta (jika sesuai):
+${preferredType || ""}
+
+Soalan:
+${question}
+
+Jawapan:
+${answer}
+`;
+
+      const chartCompletion = await openai.chat.completions.create({
+        model: "gpt-4.1-mini",
+        temperature: 0.2,
+        response_format: { type: "json_object" },
+        messages: [
+          {
+            role: "system",
+            content:
+              "Anda membina data carta JSON untuk dashboard analitik kerajaan."
+          },
+          { role: "user", content: chartPrompt }
+        ]
+      });
+
+      let chart = null;
+      try {
+        chart = JSON.parse(chartCompletion.choices[0].message.content || "{}");
+      } catch (parseError) {
+        chart = { error: "INSUFFICIENT_DATA" };
+      }
+
+      if (!chart || chart.error) {
+        res.json({ chart: { error: "INSUFFICIENT_DATA" } });
+        return;
+      }
+
+      if (!Array.isArray(chart.labels) || !Array.isArray(chart.values)) {
+        res.json({ chart: { error: "INSUFFICIENT_DATA" } });
+        return;
+      }
+
+      if (preferredType && ["bar", "line", "pie"].includes(preferredType)) {
+        chart.type = preferredType;
+      }
+
+      res.json({ chart });
+      return;
+    }
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4.1-mini",

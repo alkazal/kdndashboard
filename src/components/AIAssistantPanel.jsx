@@ -1,6 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronLeftIcon,
+  ChartBarIcon,
+  ChartPieIcon,
+  MagnifyingGlassPlusIcon
+} from "@heroicons/react/24/outline";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ReactECharts from "echarts-for-react";
@@ -9,6 +14,7 @@ export default function AIAssistantPanel({ open, onClose }) {
   const panelRef = useRef(null);
   const messagesRef = useRef(null);
   const [input, setInput] = useState("");
+  const [modalChart, setModalChart] = useState(null);
   const [messages, setMessages] = useState([
     {
       role: "assistant",
@@ -151,7 +157,7 @@ export default function AIAssistantPanel({ open, onClose }) {
     };
   };
 
-  const generateChart = async (index, question, answer) => {
+  const generateChart = async (index, question, answer, preferredType) => {
     updateMessageAt(index, (msg) => ({
       ...msg,
       chartLoading: true,
@@ -165,7 +171,8 @@ export default function AIAssistantPanel({ open, onClose }) {
         body: JSON.stringify({
           question,
           answer,
-          mode: "chart"
+          mode: "chart",
+          preferredType
         })
       });
 
@@ -253,17 +260,55 @@ export default function AIAssistantPanel({ open, onClose }) {
                 <div className="flex flex-wrap items-center gap-2">
                   <button
                     type="button"
+                    aria-label="Jana carta bar"
+                    title="Jana carta bar"
                     onClick={() =>
-                      generateChart(i, messages[i - 1]?.content, m.content)
+                      generateChart(
+                        i,
+                        messages[i - 1]?.content,
+                        m.content,
+                        "bar"
+                      )
                     }
-                    className="text-xs px-3 py-1 rounded bg-white/60 hover:bg-white text-slate-300"
+                    className="p-2 rounded bg-white/60 hover:bg-white text-slate-400 disabled:opacity-50"
                     disabled={
                       m.chartLoading ||
                       !messages[i - 1] ||
                       messages[i - 1].role !== "user"
                     }
                   >
-                    {m.chartLoading ? "Menjana..." : "Jana carta"}
+                    <ChartBarIcon className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Jana carta pai"
+                    title="Jana carta pai"
+                    onClick={() =>
+                      generateChart(
+                        i,
+                        messages[i - 1]?.content,
+                        m.content,
+                        "pie"
+                      )
+                    }
+                    className="p-2 rounded bg-white/60 hover:bg-white text-slate-400 disabled:opacity-50"
+                    disabled={
+                      m.chartLoading ||
+                      !messages[i - 1] ||
+                      messages[i - 1].role !== "user"
+                    }
+                  >
+                    <ChartPieIcon className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Besarkan carta"
+                    title="Besarkan carta"
+                    onClick={() => setModalChart(m.chart)}
+                    className="p-2 rounded bg-white/60 hover:bg-white text-slate-400 disabled:opacity-50"
+                    disabled={!m.chart}
+                  >
+                    <MagnifyingGlassPlusIcon className="w-4 h-4" />
                   </button>
                   {m.chartError ? (
                     <span className="text-xs text-red-600">
@@ -314,6 +359,36 @@ export default function AIAssistantPanel({ open, onClose }) {
           Hantar
         </button> */}
       </div>
+
+      {modalChart ? (
+        <div className="fixed top-4 left-[360px] z-50">
+          <div className="bg-white rounded-lg shadow-xl w-[70vw] max-w-3xl">
+            <div className="flex items-center justify-between px-4 py-3 border-b">
+              <span className="text-sm font-semibold">
+                {modalChart.title || "Carta Analitik"}
+              </span>
+              <button
+                type="button"
+                onClick={() => setModalChart(null)}
+                className="text-xs px-2 py-1 rounded bg-slate-100 text-slate-500 hover:bg-slate-200"
+              >
+                Tutup
+              </button>
+            </div>
+            <div className="p-4">
+              <ReactECharts
+                option={buildChartOption(modalChart)}
+                style={{ height: 420, width: "100%" }}
+              />
+              {modalChart.note ? (
+                <div className="text-xs text-slate-500 mt-2">
+                  {modalChart.note}
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
