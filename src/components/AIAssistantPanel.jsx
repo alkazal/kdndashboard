@@ -256,7 +256,7 @@ export default function AIAssistantPanel({ open, onClose }) {
                     onClick={() =>
                       generateChart(i, messages[i - 1]?.content, m.content)
                     }
-                    className="text-xs px-3 py-1 rounded bg-white/60 hover:bg-white text-slate-900"
+                    className="text-xs px-3 py-1 rounded bg-white/60 hover:bg-white text-slate-300"
                     disabled={
                       m.chartLoading ||
                       !messages[i - 1] ||
