@@ -4,7 +4,8 @@ import {
   ChevronLeftIcon,
   ChartBarIcon,
   ChartPieIcon,
-  MagnifyingGlassPlusIcon
+  MagnifyingGlassPlusIcon,
+  ArrowTrendingUpIcon
 } from "@heroicons/react/24/outline";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -302,6 +303,27 @@ export default function AIAssistantPanel({ open, onClose }) {
                   </button>
                   <button
                     type="button"
+                    aria-label="Jana carta garis"
+                    title="Jana carta garis"
+                    onClick={() =>
+                      generateChart(
+                        i,
+                        messages[i - 1]?.content,
+                        m.content,
+                        "line"
+                      )
+                    }
+                    className="p-2 rounded bg-white/60 hover:bg-white text-slate-400 disabled:opacity-50"
+                    disabled={
+                      m.chartLoading ||
+                      !messages[i - 1] ||
+                      messages[i - 1].role !== "user"
+                    }
+                  >
+                    <ArrowTrendingUpIcon className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
                     aria-label="Besarkan carta"
                     title="Besarkan carta"
                     onClick={() => setModalChart(m.chart)}
@@ -361,7 +383,7 @@ export default function AIAssistantPanel({ open, onClose }) {
       </div>
 
       {modalChart ? (
-        <div className="fixed top-4 left-[360px] z-50">
+        <div className="fixed top-4 left-[370px] z-50">
           <div className="bg-white rounded-lg shadow-xl w-[70vw] max-w-3xl">
             <div className="flex items-center justify-between px-4 py-3 border-b">
               <span className="text-sm font-semibold">
