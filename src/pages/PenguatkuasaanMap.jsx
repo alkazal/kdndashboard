@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { GoogleMap, InfoWindow, Marker, useLoadScript } from "@react-google-maps/api";
 import ReactECharts from "echarts-for-react";
 import states from "../maps/states.json"; // copied from uploaded file
@@ -66,8 +66,6 @@ const reportPinSvg = {
 export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer = false, onToggleLaporanLayer }) {
   const [selectedState, setSelectedState] = useState(null);
   const [selectedLaporan, setSelectedLaporan] = useState(null);
-  const [showStateMarkers, setShowStateMarkers] = useState(true);
-  const [selectedStateFilter, setSelectedStateFilter] = useState("");
   const [filters, setFilters] = useState({
     dateFrom: "",
     dateTo: "",
@@ -76,7 +74,15 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
     negeri: "",
     statusKes: ""
   });
-  const { openPerjawatanPanel, openLaporanDetail } = useDashboardStore();
+  const {
+    openPerjawatanPanel,
+    openLaporanDetail,
+    showPenjawatanMarkers,
+    setShowPenjawatanMarkers,
+    penjawatanStateFilter,
+    setPenjawatanStateFilter,
+    penjawatanFocusState
+  } = useDashboardStore();
 
   const perjawatanSummary = useMemo(() => {
     return statesPerjawatanInfo.reduce((acc, item) => {
@@ -98,9 +104,9 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
   }, []);
 
   const filteredPerjawatanData = useMemo(() => {
-    if (!selectedStateFilter) return statesPerjawatanInfo;
-    return statesPerjawatanInfo.filter(item => item.state === selectedStateFilter);
-  }, [selectedStateFilter]);
+    if (!penjawatanStateFilter) return statesPerjawatanInfo;
+    return statesPerjawatanInfo.filter(item => item.state === penjawatanStateFilter);
+  }, [penjawatanStateFilter]);
 
   const perjawatanTotals = useMemo(() => {
     return filteredPerjawatanData.reduce((acc, item) => {
@@ -198,6 +204,29 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY
   });
 
+  useEffect(() => {
+    if (!penjawatanFocusState) return;
+    const target = states.find(
+      (state) =>
+        normalizeStateName(state.name) ===
+        normalizeStateName(penjawatanFocusState)
+    );
+    if (!target) return;
+
+    const position = {
+      lat: Number(target.lat),
+      lng: Number(target.long)
+    };
+
+    const summary = perjawatanSummary[normalizeStateName(target.name)];
+
+    setSelectedState({
+      name: target.name,
+      position,
+      summary
+    });
+  }, [penjawatanFocusState, perjawatanSummary]);
+
   if (!isLoaded) {
     return <div className="p-8">Memuatkan peta…</div>;
   }
@@ -216,20 +245,20 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
         <label className="flex items-center gap-2 bg-white/90 dark:bg-gray-800/90 px-3 py-2 rounded shadow text-sm text-gray-200 dark:text-gray-100">
           <input
             type="checkbox"
-            checked={showStateMarkers}
-            onChange={() => setShowStateMarkers(v => !v)}
+            checked={showPenjawatanMarkers}
+            onChange={() => setShowPenjawatanMarkers(!showPenjawatanMarkers)}
             className="h-4 w-4"
           />
           Papar Penjawatan
         </label>
 
-        {showStateMarkers && (
+        {showPenjawatanMarkers && (
           <div className="bg-white/90 dark:bg-gray-800/90 px-3 py-3 rounded shadow space-y-2">
             <div className="text-xs font-semibold text-gray-200 dark:text-gray-200">TAPIS PENJAWATAN</div>
             
             <select
-              value={selectedStateFilter}
-              onChange={(e) => setSelectedStateFilter(e.target.value)}
+              value={penjawatanStateFilter}
+              onChange={(e) => setPenjawatanStateFilter(e.target.value)}
               className="w-full text-xs px-2 py-1 rounded border dark:bg-gray-700 dark:text-gray-100"
             >
               <option value="">Semua Negeri</option>
@@ -241,7 +270,7 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
             {/* KPI Cards */}
             <div className="pt-2 border-t border-gray-300 dark:border-gray-600">
               <div className="text-xs font-semibold text-gray-200 dark:text-gray-200 mb-2">
-                {selectedStateFilter ? `STATUS PENJAWATAN - ${selectedStateFilter}` : 'JUMLAH PENJAWATAN'}
+                {penjawatanStateFilter ? `STATUS PENJAWATAN - ${penjawatanStateFilter}` : 'JUMLAH PENJAWATAN'}
               </div>
               <div className="grid grid-cols-3 gap-2 text-xs">
                 <div className="bg-blue-600 text-white rounded p-2 text-center">
@@ -260,7 +289,7 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
             </div>
 
             {/* Breakdown Table */}
-            {selectedStateFilter && filteredPerjawatanData.length > 0 && (
+            {penjawatanStateFilter && filteredPerjawatanData.length > 0 && (
               <div className="pt-2 border-t border-gray-300 dark:border-gray-600">
                 <div className="text-xs font-semibold text-gray-200 dark:text-gray-200 mb-2">
                   PECAHAN MENGIKUT JAWATAN
@@ -402,7 +431,7 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
           zoomControl: true
         }}
       >
-        {showStateMarkers && states.map((state) => {
+        {showPenjawatanMarkers && states.map((state) => {
           const position = {
             lat: Number(state.lat),
             lng: Number(state.long)

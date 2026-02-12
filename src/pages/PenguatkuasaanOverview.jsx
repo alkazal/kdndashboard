@@ -39,8 +39,14 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage, on
         });
      }, []);
 
-    const { setChartFilter, clearChartFilter } =
-        useDashboardStore();
+    const {
+        setChartFilter,
+        clearChartFilter,
+        filterNegeri,
+        filterJenis,
+        mapViewOpen,
+        setMapViewOpen
+    } = useDashboardStore();
     
     const { negeriList, jenisList, data } =
         groupByNegeriJenis(operasi);
@@ -56,7 +62,7 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage, on
         }
     };
 
-    const [showMap, setShowMap] = useState(false);
+    const showMap = mapViewOpen;
     const [showLaporanLayer, setShowLaporanLayer] = useState(false);
 
     const [aiOpen, setAiOpen] = useState(false);
@@ -71,10 +77,10 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage, on
                     period="Januari – Mei 2026"
                     onAIClick={() => setAiOpen((v) => !v)}
                     aiActive={aiOpen}
-                    onCOPClick={() => setShowMap((v) => !v)}
+                    onCOPClick={() => setMapViewOpen(!showMap)}
                     copActive={showMap}
                     onLaporanClick={() => {
-                        setShowMap(true);
+                        setMapViewOpen(true);
                         setShowLaporanLayer(true);
                     }}
                     laporanActive={showLaporanLayer}
@@ -175,7 +181,7 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage, on
                                     <h2 className="font-semibold text-lg text-slate-600 dark:text-slate-200">
                                         LAPORAN NEGERI & AKTA
                                     </h2>
-                                    {(useDashboardStore.getState().filterNegeri || useDashboardStore.getState().filterJenis) && (
+                                    {(filterNegeri || filterJenis) && (
                                         <button
                                             onClick={clearChartFilter}
                                             className="text-xs px-3 py-1 bg-red-100 text-red-700 hover:bg-red-200 rounded transition"
@@ -189,7 +195,8 @@ export default function PenguatkuasaanOverview({ currentPage, setCurrentPage, on
                                     option={getNegeriJenisBarOption(
                                         negeriList,
                                         jenisList,
-                                        data
+                                        data,
+                                        { negeri: filterNegeri, jenis: filterJenis }
                                     )}
                                     onEvents={onEvents}
                                     style={{ height: 200 }}

@@ -10,12 +10,95 @@ import {
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ReactECharts from "echarts-for-react";
+import { useDashboardStore } from "../store/dashboardStore";
+import states from "../maps/states.json";
+import statesPerjawatanInfo from "../data/penguatkuasaan/statesPerjawatanInfo.json";
+
+const normalizeText = (value) =>
+  (value || "")
+    .toString()
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const normalizeCompact = (value) => normalizeText(value).replace(/\s/g, "");
+
+const negeriAliasMap = {
+  "N. SEMBILAN": ["NEGERI SEMBILAN", "N SEMBILAN"],
+  "KUALA LUMPUR": ["WILAYAH PERSEKUTUAN KUALA LUMPUR", "WP KUALA LUMPUR"],
+  "HQ PUTRAJAYA": ["PUTRAJAYA", "WILAYAH PERSEKUTUAN PUTRAJAYA", "WP PUTRAJAYA"]
+};
+
+const negeriCandidates = states.flatMap((state) => {
+  const aliases = negeriAliasMap[state.name] || [];
+  return [state.name, ...aliases].map((alias) => ({
+    label: state.name,
+    alias,
+    score: normalizeText(alias).length
+  }));
+});
+
+const perjawatanStateOptions = [
+  ...new Set(statesPerjawatanInfo.map((item) => item.state))
+];
+
+const jenisCandidates = ["AMCP 1984", "APTQ 1986", "APF 2002", "AAP 1971"].flatMap(
+  (jenis) => [
+    { label: jenis, alias: jenis },
+    { label: jenis, alias: jenis.replace(/\s+/g, "") }
+  ]
+);
+
+const extractNegeriFromAnswer = (answer) => {
+  const normalized = normalizeText(answer);
+  const sorted = [...negeriCandidates].sort((a, b) => b.score - a.score);
+  const match = sorted.find((item) =>
+    normalized.includes(normalizeText(item.alias))
+  );
+  return match?.label || null;
+};
+
+const extractJenisFromAnswer = (answer) => {
+  const normalized = normalizeText(answer);
+  const compact = normalizeCompact(answer);
+  const match = jenisCandidates.find((item) =>
+    normalized.includes(normalizeText(item.alias)) ||
+    compact.includes(normalizeCompact(item.alias))
+  );
+  return match?.label || null;
+};
+
+const resolvePerjawatanState = (value) => {
+  if (!value) return null;
+  const normalized = normalizeText(value);
+  const match = perjawatanStateOptions.find(
+    (state) => normalizeText(state) === normalized
+  );
+  if (match) return match;
+
+  const containsMatch = perjawatanStateOptions.find((state) =>
+    normalized.includes(normalizeText(state))
+  );
+  return containsMatch || null;
+};
 
 export default function AIAssistantPanel({ open, onClose }) {
   const panelRef = useRef(null);
   const messagesRef = useRef(null);
   const [input, setInput] = useState("");
   const [modalChart, setModalChart] = useState(null);
+  const setChartFilter = useDashboardStore((s) => s.setChartFilter);
+  const setMapViewOpen = useDashboardStore((s) => s.setMapViewOpen);
+  const setShowPenjawatanMarkers = useDashboardStore(
+    (s) => s.setShowPenjawatanMarkers
+  );
+  const setPenjawatanStateFilter = useDashboardStore(
+    (s) => s.setPenjawatanStateFilter
+  );
+  const setPenjawatanFocusState = useDashboardStore(
+    (s) => s.setPenjawatanFocusState
+  );
   const [messages, setMessages] = useState([
     {
       role: "assistant",
@@ -48,6 +131,21 @@ export default function AIAssistantPanel({ open, onClose }) {
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
 
+    const normalizedInput = normalizeText(input);
+    const wantsPenjawatan = normalizedInput.includes("PENJAWATAN");
+
+    if (wantsPenjawatan) {
+      const detectedNegeri = extractNegeriFromAnswer(input);
+      const resolvedPenjawatanState =
+        resolvePerjawatanState(detectedNegeri) ||
+        resolvePerjawatanState(input);
+
+      setMapViewOpen(true);
+      setShowPenjawatanMarkers(true);
+      setPenjawatanStateFilter(resolvedPenjawatanState || "");
+      setPenjawatanFocusState(detectedNegeri || resolvedPenjawatanState || null);
+    }
+
     try {
       const res = await fetch("/api/ai-chat", {
         method: "POST",
@@ -78,6 +176,16 @@ export default function AIAssistantPanel({ open, onClose }) {
       }
 
       const answer = data?.answer || "Maaf, tiada jawapan diterima.";
+
+      const detectedNegeri = extractNegeriFromAnswer(answer);
+      const detectedJenis = extractJenisFromAnswer(answer);
+
+      if (detectedNegeri || detectedJenis) {
+        setChartFilter({
+          negeri: detectedNegeri,
+          jenis: detectedJenis
+        });
+      }
 
       setMessages((prev) => [
         ...prev,
@@ -383,7 +491,7 @@ export default function AIAssistantPanel({ open, onClose }) {
       </div>
 
       {modalChart ? (
-        <div className="fixed top-4 left-[370px] z-50">
+        <div className="fixed top-4 left-92.5 z-50">
           <div className="bg-white rounded-lg shadow-xl w-[70vw] max-w-3xl">
             <div className="flex items-center justify-between px-4 py-3 border-b">
               <span className="text-sm font-semibold">

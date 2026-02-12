@@ -8,6 +8,11 @@ export const useDashboardStore = create((set) => ({
   filterNegeri: null,
   filterJenis: null,
 
+  mapViewOpen: false,
+  showPenjawatanMarkers: true,
+  penjawatanStateFilter: "",
+  penjawatanFocusState: null,
+
   openDrilldown: (category) =>
     set({ selectedCategory: category, selectedPerjawatan: null }),
 
@@ -36,6 +41,18 @@ export const useDashboardStore = create((set) => ({
     set({
       filterNegeri: null,
       filterJenis: null
-    })
+    }),
+
+  setMapViewOpen: (value) =>
+    set({ mapViewOpen: Boolean(value) }),
+
+  setShowPenjawatanMarkers: (value) =>
+    set({ showPenjawatanMarkers: Boolean(value) }),
+
+  setPenjawatanStateFilter: (value) =>
+    set({ penjawatanStateFilter: value || "" }),
+
+  setPenjawatanFocusState: (value) =>
+    set({ penjawatanFocusState: value || null })
   
 }));
