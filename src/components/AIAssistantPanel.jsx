@@ -88,6 +88,7 @@ export default function AIAssistantPanel({ open, onClose }) {
   const messagesRef = useRef(null);
   const [input, setInput] = useState("");
   const [modalChart, setModalChart] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const setChartFilter = useDashboardStore((s) => s.setChartFilter);
   const setMapViewOpen = useDashboardStore((s) => s.setMapViewOpen);
   const setShowPenjawatanMarkers = useDashboardStore(
@@ -145,6 +146,8 @@ export default function AIAssistantPanel({ open, onClose }) {
       setPenjawatanStateFilter(resolvedPenjawatanState || "");
       setPenjawatanFocusState(detectedNegeri || resolvedPenjawatanState || null);
     }
+
+    setIsLoading(true);
 
     try {
       const res = await fetch("/api/ai-chat", {
@@ -208,6 +211,8 @@ export default function AIAssistantPanel({ open, onClose }) {
           chartError: null
         }
       ]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -465,6 +470,17 @@ export default function AIAssistantPanel({ open, onClose }) {
             )}
           </div>
         ))}
+
+        {isLoading ? (
+          <div className="p-3 rounded bg-primary text-black">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex h-3 w-3 rounded-full border-2 border-teal-600 border-t-transparent animate-spin" />
+              <span className="text-xs text-slate-300">
+                Menjana jawapan…
+              </span>
+            </div>
+          </div>
+        ) : null}
       </div>
 
       {/* Input */}
@@ -481,6 +497,7 @@ export default function AIAssistantPanel({ open, onClose }) {
           rows={3}
           className="flex-1 border rounded px-3 py-2 text-sm resize-none"
           placeholder="Tanya data atau statistik…"
+          disabled={isLoading}
         />
         {/* <button
           onClick={submit}
