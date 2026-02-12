@@ -450,6 +450,12 @@ export default function AIAssistantPanel({ open, onClose }) {
                       {m.chartError}
                     </span>
                   ) : null}
+                  {m.chartLoading ? (
+                    <span className="inline-flex items-center gap-2 text-xs text-slate-600">
+                      <span className="inline-flex h-3 w-3 rounded-full border-2 border-teal-600 border-t-transparent animate-spin" />
+                      Menjana carta…
+                    </span>
+                  ) : null}
                 </div>
                 {m.chart ? (
                   <div className="bg-white/80 rounded p-2">
