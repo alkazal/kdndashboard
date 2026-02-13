@@ -1,12 +1,12 @@
-import OpenAI from "openai";
+// import OpenAI from "openai";
 import operasi from "../data/penguatkuasaan/operasi.json";
 import statistik from "../data/penguatkuasaan/statistik.json";
 import laporan from "../data/penguatkuasaan/laporan.json";
 import penjawatan from "../data/penguatkuasaan/penjawatan.json";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
+// const openai = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY
+// });
 
 export default async function handler(req, res) {
   const { question } = req.body;
