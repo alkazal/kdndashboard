@@ -1,15 +1,15 @@
 import fs from "fs";
 import path from "path";
-//import OpenAI from "openai";
+import OpenAI from "openai";
 import Groq from "groq-sdk";
 
-// const openai = new OpenAI({
-//   apiKey: process.env.OPENAI_API_KEY
-// });
-
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
 });
+
+// const groq = new Groq({
+//   apiKey: process.env.GROQ_API_KEY
+// });
 
 const readJson = (relativePath) => {
   const filePath = path.join(process.cwd(), relativePath);
@@ -61,7 +61,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    if (!process.env.GROQ_API_KEY) {
+    if (!process.env.OPENAI_API_KEY) {
       res.statusCode = 500;
       res.setHeader("Content-Type", "application/json");
       res.end(JSON.stringify({ error: "GROQ_API_KEY is not set" }));
@@ -145,24 +145,8 @@ ${resolvedContext}
     //     ]
     //   });
 
-    // const chartCompletion = await openai.chat.completions.create({
-    //   model: "gpt-4.1-mini",
-    //   messages: [
-    //     {
-    //       role: "system",
-    //       content:
-    //         "Anda ialah pembantu analitik. Anda hanya membalas JSON yang sah untuk spesifikasi carta."
-    //     },
-    //     {
-    //       role: "user",
-    //       content: chartPrompt
-    //     }
-    //   ]
-    // });
-    const chartCompletion = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
-      temperature: 0.2,
-      response_format: { type: "json_object" },
+    const chartCompletion = await openai.chat.completions.create({
+      model: "gpt-4.1-mini",
       messages: [
         {
           role: "system",
@@ -175,6 +159,22 @@ ${resolvedContext}
         }
       ]
     });
+    // const chartCompletion = await groq.chat.completions.create({
+    //   model: "llama-3.3-70b-versatile",
+    //   temperature: 0.2,
+    //   response_format: { type: "json_object" },
+    //   messages: [
+    //     {
+    //       role: "system",
+    //       content:
+    //         "Anda ialah pembantu analitik. Anda hanya membalas JSON yang sah untuk spesifikasi carta."
+    //     },
+    //     {
+    //       role: "user",
+    //       content: chartPrompt
+    //     }
+    //   ]
+    // });
 
       let chart = null;
       try {
@@ -218,34 +218,34 @@ ${resolvedContext}
     //   ]
     // });
 
-    // const completion = await openai.chat.completions.create({
-    //   model: "gpt-4.1-mini",
-    //   messages: [
-    //     {
-    //       role: "system",
-    //       content: "Anda ialah pembantu analitik sistem dashboard kerajaan."
-    //     },
-    //     {
-    //       role: "user",
-    //       content: `${resolvedContext}\n\nSoalan:\n${question || ""}`
-    //     }
-    //   ]
-    // });
-
-    const completion = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4.1-mini",
       messages: [
         {
           role: "system",
-          content:
-            "Anda ialah pembantu analitik sistem dashboard kerajaan."
+          content: "Anda ialah pembantu analitik sistem dashboard kerajaan."
         },
         {
           role: "user",
-          content: `${resolvedContext}\n\nSoalan:\n${question}`
+          content: `${resolvedContext}\n\nSoalan:\n${question || ""}`
         }
       ]
     });
+
+    // const completion = await groq.chat.completions.create({
+    //   model: "llama-3.3-70b-versatile",
+    //   messages: [
+    //     {
+    //       role: "system",
+    //       content:
+    //         "Anda ialah pembantu analitik sistem dashboard kerajaan."
+    //     },
+    //     {
+    //       role: "user",
+    //       content: `${resolvedContext}\n\nSoalan:\n${question}`
+    //     }
+    //   ]
+    // });
 
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
