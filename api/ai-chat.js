@@ -61,10 +61,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    if (!process.env.OPENAI_API_KEY) {
+    if (!process.env.GROQ_API_KEY) {
       res.statusCode = 500;
       res.setHeader("Content-Type", "application/json");
-      res.end(JSON.stringify({ error: "OPENAI_API_KEY is not set" }));
+      res.end(JSON.stringify({ error: "GROQ_API_KEY is not set" }));
       return;
     }
 
