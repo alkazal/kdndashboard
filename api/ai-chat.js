@@ -146,7 +146,7 @@ ${resolvedContext}
     //   });
 
     const chartCompletion = await openai.chat.completions.create({
-      model: "gpt-4.1-mini",
+      model: "gpt-5-mini", //model: "gpt-4.1-mini",
       messages: [
         {
           role: "system",
@@ -219,7 +219,7 @@ ${resolvedContext}
     // });
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4.1-mini",
+      model: "gpt-5-mini", //model: "gpt-4.1-mini",
       messages: [
         {
           role: "system",
