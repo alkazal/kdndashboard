@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import OpenAI from "openai";
-import Groq from "groq-sdk";
+//import Groq from "groq-sdk";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
@@ -64,7 +64,7 @@ export default async function handler(req, res) {
     if (!process.env.OPENAI_API_KEY) {
       res.statusCode = 500;
       res.setHeader("Content-Type", "application/json");
-      res.end(JSON.stringify({ error: "GROQ_API_KEY is not set" }));
+      res.end(JSON.stringify({ error: "OPENAI_API_KEY is not set" }));
       return;
     }
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { GoogleMap, InfoWindow, Marker, useLoadScript } from "@react-google-maps/api";
 import ReactECharts from "echarts-for-react";
 import states from "../maps/states.json"; // copied from uploaded file
@@ -64,6 +64,8 @@ const reportPinSvg = {
 };
 
 export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer = false, onToggleLaporanLayer }) {
+  const mapRef = useRef(null);
+  const pendingFocusRef = useRef(null);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedLaporan, setSelectedLaporan] = useState(null);
   const [filters, setFilters] = useState({
@@ -225,6 +227,29 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
       position,
       summary
     });
+
+    // if (mapRef.current) {
+    //   mapRef.current.panTo(position);
+    //   mapRef.current.setZoom(8);
+    //   pendingFocusRef.current = null;
+    // } else {
+    //   pendingFocusRef.current = position;
+    // }
+
+    if (mapRef.current) {
+      // 1. Start the pan
+      mapRef.current.panTo(position);
+
+      // 2. Listen for when the map becomes idle (animation finished)
+      google.maps.event.addListenerOnce(mapRef.current, 'idle', () => {
+        mapRef.current.setZoom(8);
+      });
+
+      pendingFocusRef.current = null;
+    }else {
+      pendingFocusRef.current = position;
+    }
+    
   }, [penjawatanFocusState, perjawatanSummary]);
 
   if (!isLoaded) {
@@ -425,6 +450,17 @@ export default function PenguatkuasaanMap({ embedded = false, showLaporanLayer =
         mapContainerStyle={containerStyle}
         center={center}
         zoom={6}
+        onLoad={(map) => {
+          mapRef.current = map;
+          if (pendingFocusRef.current) {
+            map.panTo(pendingFocusRef.current);
+            map.setZoom(8);
+            pendingFocusRef.current = null;
+          }
+        }}
+        onUnmount={() => {
+          mapRef.current = null;
+        }}
         options={{
           styles: darkMapStyle,
           disableDefaultUI: true,

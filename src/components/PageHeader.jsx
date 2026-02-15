@@ -74,7 +74,7 @@ export default function PageHeader({
               <MapPinIcon aria-hidden="true" className="mr-1.5 -ml-0.5 size-5 text-gray-400" /> 
             }
             {copActive
-                ? 'BACK': 'PETA COP'}
+                ? 'DASHBOARD': 'PETA COP'}
           </button>
         </span>
 
