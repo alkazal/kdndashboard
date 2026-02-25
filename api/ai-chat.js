@@ -71,9 +71,8 @@ export default async function handler(req, res) {
     const statistik = readJson("src/data/penguatkuasaan/statistik.json");
     const operasi = readJson("src/data/penguatkuasaan/operasi.json");
     const laporan = readJson("src/data/penguatkuasaan/laporan.json");
-    const penjawatan = readJson(
-      "src/data/penguatkuasaan/statesPerjawatanInfo.json"
-    );
+    const penjawatan = readJson("src/data/penguatkuasaan/statesPerjawatanInfo.json");
+    const profile = readJson("src/data/user-profiles.json");
 
     const DEFAULT_CONTEXT = `
 DATA PENGUATKUASAAN:
@@ -87,6 +86,9 @@ ${JSON.stringify(normalizeAll(laporan))}
 
 DATA PENJAWATAN:
 ${JSON.stringify(penjawatan)}
+
+PROFIL PENGGUNA:
+${JSON.stringify(profile)}
 `;
 
     const body = await readBody(req);

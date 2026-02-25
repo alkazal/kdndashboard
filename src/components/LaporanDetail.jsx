@@ -168,15 +168,15 @@ export default function LaporanDetail({ record, onClose }) {
 
       <div
         ref={containerRef}
-        className="bg-slate-300 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl shadow-lg
+        className="bg-slate-600 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl shadow-lg
         /* Scrollbar height */
             [&::-webkit-scrollbar]:h-2
             /* Track background */
             [&::-webkit-scrollbar-track]:bg-transparent
             /* Thumb styling */
             [&::-webkit-scrollbar-thumb]:rounded-full
-            [&::-webkit-scrollbar-thumb]:bg-indigo-400/50
-            hover:[&::-webkit-scrollbar-thumb]:bg-indigo-400
+            [&::-webkit-scrollbar-thumb]:bg-slate-400
+            hover:[&::-webkit-scrollbar-thumb]:bg-slate-500
             /* Dark mode thumb */
             dark:[&::-webkit-scrollbar-thumb]:bg-gray-600
             /* Firefox support */
@@ -187,17 +187,17 @@ export default function LaporanDetail({ record, onClose }) {
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b">
           <div>
-            <div className="text-3xl text-slate-500 font-bold">
-              {record.JENIS}
+            <div className="text-xl text-black font-bold">
+              LAPORAN PENGUATKUASAAN
             </div>
-            <h2 className="text-xl font-bold text-black">
-              LAPORAN PENGUATKUASAAN DETAIL
-            </h2>
+            <h3 className="text-black">
+             MAKLUMAT OPERASI & AKTIVITI PENGUATKUASAAN
+            </h3>
           </div>
 
           <button
             onClick={onClose}
-            className="text-slate-500 hover:text-black print:hidden"
+            className="text-slate-900 hover:text-black print:hidden"
           >
             <XMarkIcon className="w-6 h-6" />
           </button>
@@ -206,14 +206,15 @@ export default function LaporanDetail({ record, onClose }) {
         {/* Content */}
         <div className="p-6 space-y-8 text-sm">
           {/* Ringkasan */}
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-4 text-yellow-400">
+          <section className="grid grid-cols-1 md:grid-cols-4 gap-4 text-zinc-800">
             <Info label="Tarikh" value={record.TARIKH} />
             <Info label="Negeri" value={record.NEGERI} />
+            <Info label="Akta" value={record.JENIS} />
             <Info label="Status Kes" value={record["STATUS KES"]} />
           </section>
 
           {/* Lokasi */}
-          <section className="text-yellow-400">
+          <section className="text-zinc-800">
             <SectionTitle title="Maklumat Operasi" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Info label="Lokasi" value={record.LOKASI} />
@@ -223,7 +224,7 @@ export default function LaporanDetail({ record, onClose }) {
           </section>
 
           {/* Aktiviti */}
-          <section className="text-yellow-600">
+          <section className="text-zinc-800">
             <SectionTitle title="Aktiviti Penguatkuasaan" />
             <Info
               label="Aktiviti"
@@ -273,7 +274,7 @@ export default function LaporanDetail({ record, onClose }) {
           )}
 
           {/* Tindakan */}
-          <section className="text-yellow-600">
+          <section className="text-zinc-800">
             <SectionTitle title="Tindakan & Status" />
             <Info
               label="Tindakan"
@@ -315,7 +316,7 @@ export default function LaporanDetail({ record, onClose }) {
 
 function SectionTitle({ title }) {
   return (
-    <h3 className="font-semibold mb-3 text-slate-700">
+    <h3 className="font-semibold mb-3 text-slate-200">
       {title}
     </h3>
   );
@@ -324,12 +325,12 @@ function SectionTitle({ title }) {
 function Info({ label, value, block }) {
   return (
     <div>
-      <div className="text-xs text-slate-500 mb-1">
+      <div className="text-xs text-slate-400 mb-1">
         {label}
       </div>
       <div
         className={`${
-          block ? "bg-slate-100 p-3 rounded" : ""
+          block ? "bg-slate-700 p-3 rounded" : ""
         }`}
       >
         {value || "-"}

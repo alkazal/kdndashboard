@@ -30,9 +30,8 @@ const readJson = (relativePath) => {
 const statistik = readJson("./src/data/penguatkuasaan/statistik.json");
 const operasi = readJson("./src/data/penguatkuasaan/operasi.json");
 const laporan = readJson("./src/data/penguatkuasaan/laporan.json");
-const penjawatan = readJson(
-  "./src/data/penguatkuasaan/statesPerjawatanInfo.json"
-);
+const penjawatan = readJson("./src/data/penguatkuasaan/statesPerjawatanInfo.json");
+const profile = readJson("./src/data/user-profiles.json");
 
 const takeSample = (data, limit = 10) => {
   if (Array.isArray(data)) {
@@ -62,6 +61,9 @@ ${JSON.stringify(takeSample(laporan, 10))}
 
 DATA PENJAWATAN:
 ${JSON.stringify(penjawatan)}
+
+PROFIL PENGGUNA:
+${JSON.stringify(profile)}
 `;
 
 app.post("/api/ai-chat", async (req, res) => {
@@ -114,22 +116,8 @@ ${answer}
       //   ]
       // });
       
-      // const chartCompletion = await openai.chat.completions.create({
-      //   model: "gpt-4.1-mini",
-      //   temperature: 0.2,
-      //   response_format: { type: "json_object" },
-      //   messages: [
-      //     {
-      //       role: "system",
-      //       content:
-      //         "Anda ialah pembantu analitik. Anda hanya membalas JSON yang sah untuk spesifikasi carta."
-      //     },
-      //     { role: "user", content: chartPrompt }
-      //   ]
-      // });
-
-      const chartCompletion = await groq.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
+      const chartCompletion = await openai.chat.completions.create({
+        model: "gpt-4.1-mini",
         temperature: 0.2,
         response_format: { type: "json_object" },
         messages: [
@@ -141,6 +129,20 @@ ${answer}
           { role: "user", content: chartPrompt }
         ]
       });
+
+      // const chartCompletion = await groq.chat.completions.create({
+      //   model: "llama-3.3-70b-versatile",
+      //   temperature: 0.2,
+      //   response_format: { type: "json_object" },
+      //   messages: [
+      //     {
+      //       role: "system",
+      //       content:
+      //         "Anda ialah pembantu analitik. Anda hanya membalas JSON yang sah untuk spesifikasi carta."
+      //     },
+      //     { role: "user", content: chartPrompt }
+      //   ]
+      // });
 
       let chart = null;
       try {
@@ -187,22 +189,8 @@ ${answer}
     //   ]
     // });
 
-    // const completion = await openai.chat.completions.create({
-    //   model: "gpt-4.1-mini",
-    //   messages: [
-    //     {
-    //       role: "system",
-    //       content:
-    //         "Anda ialah pembantu analitik sistem dashboard kerajaan."
-    //     },
-    //     {
-    //       role: "user",
-    //       content: `${resolvedContext}\n\nSoalan:\n${question}`
-    //     }
-    //   ]
-    // });
-    const completion = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4.1-mini",
       messages: [
         {
           role: "system",
@@ -215,6 +203,20 @@ ${answer}
         }
       ]
     });
+    // const completion = await groq.chat.completions.create({
+    //   model: "llama-3.3-70b-versatile",
+    //   messages: [
+    //     {
+    //       role: "system",
+    //       content:
+    //         "Anda ialah pembantu analitik sistem dashboard kerajaan."
+    //     },
+    //     {
+    //       role: "user",
+    //       content: `${resolvedContext}\n\nSoalan:\n${question}`
+    //     }
+    //   ]
+    // });
 
     res.json({
       answer: completion.choices[0].message.content

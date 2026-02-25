@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import gsap from "gsap";
 import {
   ChevronLeftIcon,
@@ -13,6 +13,9 @@ import ReactECharts from "echarts-for-react";
 import { useDashboardStore } from "../store/dashboardStore";
 import states from "../maps/states.json";
 import statesPerjawatanInfo from "../data/penguatkuasaan/statesPerjawatanInfo.json";
+import userProfiles from "../data/user-profiles.json";
+import laporanData from "../data/penguatkuasaan/laporan.json";
+import UserKPIDashboard from "./UserKPIDashboard";
 
 const normalizeText = (value) =>
   (value || "")
@@ -23,6 +26,92 @@ const normalizeText = (value) =>
     .trim();
 
 const normalizeCompact = (value) => normalizeText(value).replace(/\s/g, "");
+
+const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const buildNamePattern = (name) => {
+  const tokens = normalizeText(name).split(" ").filter(Boolean);
+  if (tokens.length === 0) return null;
+  const joined = tokens.map(escapeRegex).join("[^A-Z0-9]+?");
+  return new RegExp(`(^|[^A-Z0-9])(${joined})(?=$|[^A-Z0-9])`, "gi");
+};
+
+const buildLocationPattern = (location) => {
+  const tokens = normalizeText(location).split(" ").filter(Boolean);
+  if (tokens.length < 2) return null;
+  const joined = tokens.map(escapeRegex).join("[^A-Z0-9]+?");
+  return new RegExp(`(^|[^A-Z0-9])(${joined})(?=$|[^A-Z0-9])`, "gi");
+};
+
+const linkifyUserNames = (content, users) => {
+  if (!content || !users?.length) return content;
+  const sortedUsers = [...users].sort(
+    (a, b) => b.name.length - a.name.length
+  );
+
+  return sortedUsers.reduce((output, user) => {
+    if (!user?.name) return output;
+    const regex = buildNamePattern(user.name);
+    if (!regex) return output;
+    return output.replace(regex, (full, lead, match) => {
+      const encoded = encodeURIComponent(user.name);
+      return `${lead}[${match}](user:${encoded})`;
+    });
+  }, content);
+};
+
+const linkifyLaporan = (content, laporan) => {
+  if (!content || !laporan?.length) return content;
+  const sorted = [...laporan].sort((a, b) => {
+    const aLen = (a?.LOKASI || "").length;
+    const bLen = (b?.LOKASI || "").length;
+    return bLen - aLen;
+  });
+
+  let output = content;
+
+  sorted.forEach((record) => {
+    if (!record) return;
+    if (record.ID !== undefined && record.ID !== null) {
+      const idPattern = new RegExp(`\\bID\\s*[:#]?\\s*${record.ID}\\b`, "gi");
+      output = output.replace(idPattern, (match) => {
+        return `[${match}](laporan:${record.ID})`;
+      });
+    }
+
+    if (record.LOKASI) {
+      const locationPattern = buildLocationPattern(record.LOKASI);
+      if (!locationPattern) return;
+      output = output.replace(locationPattern, (full, lead, match) => {
+        return `${lead}[${match}](laporan:${record.ID})`;
+      });
+    }
+  });
+
+  return output;
+};
+
+const getUserFromHref = (href) => {
+  if (!href) return null;
+  const trimmed = href.trim().replace(/^([/#]+)/, "");
+  const decoded = decodeURIComponent(trimmed);
+  if (decoded.toLowerCase().startsWith("user:")) {
+    return decoded.slice(5).trim();
+  }
+  return null;
+};
+
+const getLaporanIdFromHref = (href) => {
+  if (!href) return null;
+  const trimmed = href.trim().replace(/^([/#]+)/, "");
+  const decoded = decodeURIComponent(trimmed);
+  if (decoded.toLowerCase().startsWith("laporan:")) {
+    const idValue = decoded.slice(8).trim();
+    const id = Number(idValue);
+    return Number.isNaN(id) ? null : id;
+  }
+  return null;
+};
 
 const negeriAliasMap = {
   "N. SEMBILAN": ["NEGERI SEMBILAN", "N SEMBILAN"],
@@ -89,7 +178,9 @@ export default function AIAssistantPanel({ open, onClose }) {
   const [input, setInput] = useState("");
   const [modalChart, setModalChart] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
   const setChartFilter = useDashboardStore((s) => s.setChartFilter);
+  const openLaporanDetail = useDashboardStore((s) => s.openLaporanDetail);
   const setMapViewOpen = useDashboardStore((s) => s.setMapViewOpen);
   const setShowPenjawatanMarkers = useDashboardStore(
     (s) => s.setShowPenjawatanMarkers
@@ -110,6 +201,25 @@ export default function AIAssistantPanel({ open, onClose }) {
       chartError: null
     }
   ]);
+
+  const users = useMemo(() => userProfiles?.users || [], []);
+  const laporan = useMemo(() => (Array.isArray(laporanData) ? laporanData : []), []);
+
+  const handleUserLink = (userName) => {
+    const matchedUser = users.find(
+      (user) => normalizeText(user.name) === normalizeText(userName)
+    );
+    if (matchedUser) {
+      setSelectedUser(matchedUser);
+    }
+  };
+
+  const handleLaporanLink = (laporanId) => {
+    const matched = laporan.find((record) => Number(record.ID) === Number(laporanId));
+    if (matched) {
+      openLaporanDetail(matched);
+    }
+  };
 
   useEffect(() => {
     gsap.to(panelRef.current, {
@@ -368,8 +478,57 @@ export default function AIAssistantPanel({ open, onClose }) {
           >
             {m.role === "assistant" ? (
               <div className="space-y-3">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {m.content}
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  urlTransform={(url) => url}
+                  components={{
+                    a: ({ href, children }) => {
+                      const userName = getUserFromHref(href);
+                      if (userName) {
+                        return (
+                          <a
+                            href={href}
+                            onClick={(event) => {
+                              event.preventDefault();
+                              handleUserLink(userName);
+                            }}
+                            className="text-blue-700 underline hover:text-blue-900"
+                          >
+                            <span>{children}</span>
+                          </a>
+                        );
+                      }
+
+                      const laporanId = getLaporanIdFromHref(href);
+                      if (laporanId !== null) {
+                        return (
+                          <a
+                            href={href}
+                            onClick={(event) => {
+                              event.preventDefault();
+                              handleLaporanLink(laporanId);
+                            }}
+                            className="text-blue-700 underline hover:text-blue-900"
+                          >
+                            <span>{children}</span>
+                          </a>
+                        );
+                      }
+
+                      return (
+                        <a
+                          href={href}
+                          className="text-blue-700 underline hover:text-blue-900"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {children}
+                        </a>
+                      );
+                    }
+                  }}
+                >
+                  {linkifyUserNames(linkifyLaporan(m.content, laporan), users)}
                 </ReactMarkdown>
                 <div className="flex flex-wrap items-center gap-2">
                   <button
@@ -542,6 +701,13 @@ export default function AIAssistantPanel({ open, onClose }) {
           </div>
         </div>
       ) : null}
+
+      <UserKPIDashboard
+        user={selectedUser}
+        laporan={laporanData}
+        onClose={() => setSelectedUser(null)}
+        positionClass="top-4 left-92.5"
+      />
     </div>
   );
 }
